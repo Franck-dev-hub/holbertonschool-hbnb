@@ -1,45 +1,53 @@
-Business Logic Class Diagram
+## Business Logic Class Diagram
 
-'''mermaid
+```mermaid
 classDiagram
+direction TB
+    class Base {
+      +UUID id
+      +datetime time_created
+      +datetime time_updated
+	    +create()
+	    +update()
+	    +delete()
+    }
 
-class Base {
-  +create
-  +update
-  +delete
-  +listed
-}
+    class User {
+	    +UUID id_user
+	    +string first_name
+	    +string last_name
+	    +string email
+	    +string password
+	    +bool admin
+    }
 
-class User {
-  +UUID IdUser
-  +string first_name
-  +string last_name
-  +string email
-  +string password
-  +bool admin
-}
+    class Place {
+      +UUID id_user
+      +UUID id_place
+	    +string title
+	    +string description
+	    +float price
+	    +list coordonates
+	    +string owner
+    }
 
-class Place {
-    +string title
-    +string description
-    +float price
-    +list latitude
-    +list longitude
-    +User owner
-}
+    class Review {
+      +UUID id_user
+      +UUID id_place
+      +UUID id_review
+	    +int rating
+	    +string comment
+    }
 
-class Review {
-    +int rating
-    +string comment
-}
+    class Amenity {
+      +UUID id_amenity
+      +UUID id_place
+	    +string name
+	    +string description
+    }
 
-class Amenity {
-  +string name
-  +string description
-}
-
-Amenity --> Place : Part of
-Place --> Amenity : Use
-Review --> User
-Review --> Place : Use
-'''
+    Base <-- User : Inherit
+    Base <-- Place : Inherit
+    Base <-- Review : Inherit
+    Place <-- Amenity : Inherit
+```
