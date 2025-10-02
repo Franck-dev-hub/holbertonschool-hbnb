@@ -19,10 +19,14 @@ list, search, and book accommodations.
 
 ## Table of Contents
 
-1. [Description](#description)
-2. [Demo](#demo)
-3. [Api](#api)
-
+<details>
+ <summary>
+  Click to enlarge
+ </summary>
+  - [Description](#description)
+  - [Demo](#demo)
+  - [Api](#api)
+</details>
 ## Description
 
 Placeholder for future content.
