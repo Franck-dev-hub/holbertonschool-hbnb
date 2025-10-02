@@ -99,12 +99,12 @@ Placeholder for future content.
 ### **Adel Mejrissi**
 
 - GitHub: [@AdelMej](https://github.com/AdelMej)
-- LinkedIn: [@adel-mejrissi](https://www.linkedin.com/in/adel-mejrissi-709374172/)
+- LinkedIn: [@adel mejrissi](https://www.linkedin.com/in/adel-mejrissi-709374172/)
 
 ### **Franck Spadotto**
 
 - GitHub: [@Franck-dev-hub](https://github.com/Franck-dev-hub)
-- LinkedIn: [@franck-spadotto](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
+- LinkedIn: [@Franck spadotto](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
 
 ### **Haitu Nguyen**
 
