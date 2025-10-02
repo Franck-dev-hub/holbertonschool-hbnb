@@ -19,9 +19,9 @@ list, search, and book accommodations.
 
 ## Table of Contents
 
-1. [Description]("Description")
-2. [Demo]("Demo")
-3. [Api]("Api")
+1. [Description](#description)
+2. [Demo](#demo)
+3. [Api](#api)
 
 ## Description
 
