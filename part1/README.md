@@ -2,8 +2,7 @@
 
 ## Overview
 
-This repository contains the first part of the HBnB project,
-with UML diagrams and documentation.
+This repository contains the first part of the HBnB project.
 
 ## Files
 
