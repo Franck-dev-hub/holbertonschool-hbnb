@@ -5,10 +5,6 @@
 This repository contains the first part of the HBnB project,
 with UML diagrams and documentation.
 
-## mermaid repository
-
-[mermaid](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1/mermaid) Contains the mermaid UML diagrams for the HBnB project.
-
 ## Files
 
 | **File/Repository** | **Description** |
