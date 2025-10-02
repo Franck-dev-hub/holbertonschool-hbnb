@@ -8,16 +8,16 @@
 
 ```
 
-# HBnB (AirBnB clone) project for holberton School
+# 🏘️HBnB (AirBnB clone) project for holberton School
 
-## Overview
+## 📄 Overview
 
 This project is a clone of the AirBnB website,
 built as part of the curriculum at Holberton School.
 The project involves creating a web application that allows users to
 list, search, and book accommodations.
 
-## Table of Contents
+## 🔖 Table of Contents
 
 <details>
  <summary>
@@ -25,11 +25,11 @@ list, search, and book accommodations.
  </summary>
 
 - [Description](#description)
-- [Tech stack](#tech-stack)
+- 🔨 [Tech stack](#tech-stack)
 - [Demo](#demo)
 - [Api](#api)
 - [Structure](#structure)
-- [Files](#files)
+- 📂 [Files](#files)
 
 </details>
 
@@ -40,7 +40,7 @@ It allows users to create accounts, list properties, search for accommodations,
 and make bookings. The application is built using Python and follows the
 holberton School curriculum guidelines.
 
-## Tech stack
+## 🔨 Tech stack
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
@@ -71,9 +71,34 @@ Placeholder for future content.
 └── README.md
 ```
 
-## Files
+## 📂 Files
 
 | **File/Repository** | **Description** |
 |----------|-----------------|
 | [part1](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
 | [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/README.md) | README file |
+
+## 🔧 What's next?
+
+- List of next steps for the project.
+
+## ♥️ Thanks
+
+- Your message of thanks here.
+
+## 👷 Authors
+
+### **Adel Mejrissi**
+
+- GitHub: [@AdelMej](https://github.com/fchavonet)
+- LinkedIn: [@adel-mejrissi-709374172](https://www.linkedin.com/in/adel-mejrissi-709374172/)
+
+### **Franck Spadotto**
+
+- GitHub: [@Franck-dev-hub](https://github.com/Franck-dev-hub)
+- LinkedIn: [@franck-spadotto-2b3b6214a](https://www.linkedin.com/in/franck-spadotto-2b3b6214a)
+
+### **Haitu Nguyen**
+
+- GitHub: [@N-Haitu31](https://github.com/N-Haitu31)
+- LinkedIn: [@]()
