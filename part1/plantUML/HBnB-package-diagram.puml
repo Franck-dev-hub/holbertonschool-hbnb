@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+
+package User {}
+
+package PresentationLayer #LightBlue {
+	package Website {}
+	package Api {}
+}
+
+package BusinessLogicLayer #LightBlue {
+	package Model {
+	}
+}
+
+package PersistenceLayer #LightBlue {
+	package Database {}
+}
+
+User --> Website
+Website --> Api : http requests
+Api ..> Model : Facade Pattern
+Model ..> Database : Database Operations
+
+@enduml
