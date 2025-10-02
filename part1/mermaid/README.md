@@ -1,6 +1,6 @@
 # 🧜‍♀️ Mermaid
 
-## 📄 Overview
+## 📝 Overview
 
 This directory contains Mermaid diagrams that illustrate various concepts and workflows.
 Mermaid is a JavaScript-based diagramming and charting tool

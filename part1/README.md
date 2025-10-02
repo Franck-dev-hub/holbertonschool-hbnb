@@ -1,10 +1,10 @@
-# HBnB part 1
+# 🏘️ HBnB part 1
 
-## Overview
+## 📄 Overview
 
 This repository contains the first part of the HBnB project.
 
-## Files
+## 📂 Files
 
 | **File/Repository** | **Description** |
 |---------------------|-----------------|

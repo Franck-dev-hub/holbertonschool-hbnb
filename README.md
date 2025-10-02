@@ -8,7 +8,7 @@
 
 ```
 
-# 🏘️HBnB (AirBnB clone) project for holberton School
+# 🏘️ HBnB (AirBnB clone) project for holberton School
 
 ## 📄 Overview
 
@@ -28,7 +28,7 @@ list, search, and book accommodations.
 - 🔨 [Tech stack](#-tech-stack)
 - 🎬 [Demo](#-demo)
 - 🌐 [Api](#-api)
-- 🏗️ [Structure](#-structure)
+- 🏗️ [Structure](%EF%B8%8Fstructure)
 - 📂 [Files](#-files)
 - 🔧 [What's next?](#-whats-next)
 - ♥️ [Thanks](#%EF%B8%8F-thanks)
