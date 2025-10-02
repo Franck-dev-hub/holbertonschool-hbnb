@@ -25,6 +25,7 @@ list, search, and book accommodations.
  </summary>
 
 - 📝 [Description](#-description)
+- 🎓 [Objectives](#-objectives)
 - 🔨 [Tech stack](#-tech-stack)
 - 🎬 [Demo](#-demo)
 - 🌐 [Api](#-api)
@@ -42,6 +43,10 @@ HBnB is a web application that mimics the functionality of the AirBnB platform.
 It allows users to create accounts, list properties, search for accommodations,
 and make bookings. The application is built using Python and follows the
 holberton School curriculum guidelines.
+
+## 🎓 Objectives
+
+- Objectives list.
 
 ## 🔨 Tech stack
 
@@ -104,4 +109,3 @@ Placeholder for future content.
 ### **Haitu Nguyen**
 
 - GitHub: [@N-Haitu31](https://github.com/N-Haitu31)
-- LinkedIn: [@]()
