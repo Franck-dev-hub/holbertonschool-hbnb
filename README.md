@@ -23,9 +23,11 @@ list, search, and book accommodations.
  <summary>
   Click to enlarge
  </summary>
-  - [Description](#description)
-  - [Demo](#demo)
-  - [Api](#api)
+
+- [Description](#description)
+- [Demo](#demo)
+- [Api](#api)
+
 </details>
 
 ## Description
