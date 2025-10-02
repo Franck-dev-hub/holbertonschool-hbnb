@@ -35,7 +35,10 @@ list, search, and book accommodations.
 
 ## Description
 
-Placeholder for future content.
+HBnB is a web application that mimics the functionality of the AirBnB platform.
+It allows users to create accounts, list properties, search for accommodations,
+and make bookings. The application is built using Python and follows the
+holberton School curriculum guidelines.
 
 ## Tech stack
 
@@ -59,10 +62,18 @@ Placeholder for future content.
 
 ## Structure
 
-Placeholder for future content.
+```tree
+.
+├── part1
+│   ├── Documentation.pdf
+│   ├── mermaid
+│   └── README.md
+└── README.md
+```
 
 ## Files
 
-| **File** | **Description** |
+| **File/Repository** | **Description** |
 |----------|-----------------|
-| | |
+| [part1](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
+| [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/README.md) | README file |
