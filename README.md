@@ -29,7 +29,7 @@ list, search, and book accommodations.
 - 🔨 [Tech stack](#-tech-stack)
 - 🎬 [Demo](#-demo)
 - 🌐 [Api](#-api)
-- 🏗️ [Structure](%EF%B8%8Fstructure)
+- 🏗️ [Structure](#%EF%B8%8Fstructure)
 - 📂 [Files](#-files)
 - 🔧 [What's next?](#-whats-next)
 - ♥️ [Thanks](#%EF%B8%8F-thanks)
@@ -98,13 +98,13 @@ Placeholder for future content.
 
 ### **Adel Mejrissi**
 
-- GitHub: [@AdelMej](https://github.com/fchavonet)
-- LinkedIn: [@adel-mejrissi-709374172](https://www.linkedin.com/in/adel-mejrissi-709374172/)
+- GitHub: [@AdelMej](https://github.com/AdelMej)
+- LinkedIn: [@adel mejrissi](https://www.linkedin.com/in/adel-mejrissi-709374172/)
 
 ### **Franck Spadotto**
 
 - GitHub: [@Franck-dev-hub](https://github.com/Franck-dev-hub)
-- LinkedIn: [@franck-spadotto-2b3b6214a](https://www.linkedin.com/in/franck-spadotto-2b3b6214a)
+- LinkedIn: [@Franck spadotto](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
 
 ### **Haitu Nguyen**
 
