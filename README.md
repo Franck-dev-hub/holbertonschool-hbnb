@@ -24,16 +24,19 @@ list, search, and book accommodations.
   Click to enlarge
  </summary>
 
-- [Description](#description)
+- 📝 [Description](#description)
 - 🔨 [Tech stack](#tech-stack)
-- [Demo](#demo)
-- [Api](#api)
-- [Structure](#structure)
+- 🎬 [Demo](#demo)
+- 🌐 [Api](#api)
+- 🏗️ [Structure](#structure)
 - 📂 [Files](#files)
+- 🔧 [What's next?](#-whats-next)
+- ♥️ [Thanks](#%EF%B8%8F-thanks)
+- 👷 [Authors](#-authors)
 
 </details>
 
-## Description
+## 📝 Description
 
 HBnB is a web application that mimics the functionality of the AirBnB platform.
 It allows users to create accounts, list properties, search for accommodations,
@@ -52,15 +55,15 @@ holberton School curriculum guidelines.
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-## Demo
+## 🎬 Demo
 
 Placeholder for future content.
 
-## Api
+## 🌐 Api
 
 Placeholder for future content.
 
-## Structure
+## 🏗️Structure
 
 ```tree
 .
