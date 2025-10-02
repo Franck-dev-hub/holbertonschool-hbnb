@@ -24,12 +24,12 @@ list, search, and book accommodations.
   Click to enlarge
  </summary>
 
-- 📝 [Description](#description)
-- 🔨 [Tech stack](#tech-stack)
-- 🎬 [Demo](#demo)
-- 🌐 [Api](#api)
-- 🏗️ [Structure](#structure)
-- 📂 [Files](#files)
+- 📝 [Description](#-description)
+- 🔨 [Tech stack](#-tech-stack)
+- 🎬 [Demo](#-demo)
+- 🌐 [Api](#-api)
+- 🏗️ [Structure](#-structure)
+- 📂 [Files](#-files)
 - 🔧 [What's next?](#-whats-next)
 - ♥️ [Thanks](#%EF%B8%8F-thanks)
 - 👷 [Authors](#-authors)
