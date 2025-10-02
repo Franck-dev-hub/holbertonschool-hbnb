@@ -27,6 +27,7 @@ list, search, and book accommodations.
   - [Demo](#demo)
   - [Api](#api)
 </details>
+
 ## Description
 
 Placeholder for future content.
