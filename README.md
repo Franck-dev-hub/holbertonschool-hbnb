@@ -28,6 +28,8 @@ list, search, and book accommodations.
 - [Tech stack](#tech-stack)
 - [Demo](#demo)
 - [Api](#api)
+- [Structure](#structure)
+- [Files](#files)
 
 </details>
 
@@ -54,3 +56,13 @@ Placeholder for future content.
 ## Api
 
 Placeholder for future content.
+
+## Structure
+
+Placeholder for future content.
+
+## Files
+
+| **File** | **Description** |
+|----------|-----------------|
+| | |
