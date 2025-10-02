@@ -9,5 +9,5 @@ This repository contains the first part of the HBnB project.
 | **File/Repository** | **Description** |
 |---------------------|-----------------|
 | [mermaid](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1/mermaid) | Contains all of the UML diagrams |
-| [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/part1/README.md) | Provides an overview of the project and its contents |
+| [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/part1/README.md) | README file |
 | [documentation.pdf](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/part1/Documentation.pdf) | Contains additional documentation related to the project |
