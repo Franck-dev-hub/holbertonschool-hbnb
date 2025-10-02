@@ -98,7 +98,7 @@ Placeholder for future content.
 
 ### **Adel Mejrissi**
 
-- GitHub: [@AdelMej](https://github.com/fchavonet)
+- GitHub: [@AdelMej](https://github.com/AdelMej)
 - LinkedIn: [@adel-mejrissi-709374172](https://www.linkedin.com/in/adel-mejrissi-709374172/)
 
 ### **Franck Spadotto**
