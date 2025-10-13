@@ -8,7 +8,7 @@
 
 ```
 
-# 🏘️ HBnB (AirBnB clone) project for holberton School
+# 🏘️ HBnB (AirBnB clone) project for Holberton School
 
 ## 📄 Overview
 
@@ -44,10 +44,6 @@ It allows users to create accounts, list properties, search for accommodations,
 and make bookings. The application is built using Python and follows the
 holberton School curriculum guidelines.
 
-## 🎓 Objectives
-
-- Objectives list.
-
 ## 🔨 Tech stack
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -62,21 +58,45 @@ holberton School curriculum guidelines.
 
 ## 🎬 Demo
 
-Placeholder for future content.
+Comming soon.
 
 ## 🌐 Api
 
-Placeholder for future content.
+Comming soon.
 
 ## 🏗️Structure
 
 ```tree
 .
+├── README.md
 ├── part1
 │   ├── Documentation.pdf
-│   ├── mermaid
-│   └── README.md
-└── README.md
+│   ├── HBNB Documentation Projet UML.pdf
+│   ├── README.md
+│   └── mermaid
+├── part2
+│   └── hbnb
+│       ├──── README.md
+│       ├── app
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   ├── api
+│       │   ├── models
+│       │   ├── persistence
+│       │   └── services
+│       ├── config.py
+│       ├── main.py
+│       ├── pyproject.toml
+│       ├── requirements.txt
+│       ├── run.py
+│       ├── tree.txt
+│       └── uv.lock
+├── tests
+│   ├── test_Amenity.py
+│   ├── test_Place.py
+│   ├── test_Review.py
+│   └── test_User.py
+└── tree.txt
 ```
 
 ## 📂 Files
@@ -84,15 +104,9 @@ Placeholder for future content.
 | **File/Repository** | **Description** |
 |----------|-----------------|
 | [part1](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
+| [part2](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part2) | Base HBnB project structure |
 | [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/README.md) | README file |
 
-## 🔧 What's next?
-
-- List of next steps for the project.
-
-## ♥️ Thanks
-
-- Your message of thanks here.
 
 ## 👷 Authors
 
