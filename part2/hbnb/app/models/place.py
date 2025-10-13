@@ -1,4 +1,3 @@
-import re
 from app.models.base import BaseModel
 
 
