@@ -11,6 +11,9 @@ class Amenity(BaseModel):
     def __init__(self, name):
         """
         constructor for Amenity class
+
+        Arguments:
+            name (str): the name of the Amenity
         """
         super().__init__()
         self.name = name

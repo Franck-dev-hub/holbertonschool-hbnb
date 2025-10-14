@@ -135,7 +135,6 @@ class HBnBFacade:
             amenity_data (dict): A dictionary containing attributes to update.
         """
         self.amenity_repo.update(amenity_id, amenity_data)
-
     """
     --End of amenity METHODS--
     """

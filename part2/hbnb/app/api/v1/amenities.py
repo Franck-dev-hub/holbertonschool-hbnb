@@ -35,6 +35,9 @@ class AmenityList(Resource):
     def post(self):
         """
         Register a new amenity
+
+        Return:
+            Json of the newly created amenity
         """
         amenity = api.payload
         if amenity['name'] == '':
@@ -49,7 +52,12 @@ class AmenityList(Resource):
     @api.response(200, 'List of amenities retrieved successfully')
     @api.marshal_list_with(amenity_output_model)
     def get(self):
-        """Retrieve a list of all amenities"""
+        """
+        Retrieve a list of all amenities
+
+        Returns:
+            Json of all amenities
+        """
         return facade.get_all_amenities(), 200
 
 
@@ -58,7 +66,16 @@ class AmenityResource(Resource):
     @api.response(200, 'Amenity details retrieved successfully')
     @api.response(404, 'Amenity not found')
     def get(self, amenity_id):
-        """Get amenity details by ID"""
+        """
+        Get amenity details by ID
+
+        Arguments:
+            amenity_id (str): identifier for amenity object
+
+        Returns:
+            json ammenity on success
+            404 Amenity not found on errors
+        """
         amenity = facade.get_amenity(amenity_id)
         if not amenity:
             return {'error': 'Amenity not found'}, 404
@@ -74,7 +91,17 @@ class AmenityResource(Resource):
     @api.response(404, 'Amenity not found')
     @api.response(400, 'Invalid input data')
     def put(self, amenity_id):
-        """Update an amenity's information"""
+        """
+        Update an amenity's information
+
+        Arguments:
+            amenity_id (str): identifier for amenity
+
+        Returns:
+            error 400 empty input
+            error 404 Amenity not found
+            success 200 Amenity updated
+        """
         amenity = api.payload
         if amenity['name'] == '':
             return {'error': 'Invalid input data'}, 400
