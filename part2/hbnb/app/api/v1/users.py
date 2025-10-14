@@ -70,7 +70,7 @@ class UserList(Resource):
 
 
 @api.route('/users/<string:user_id>')
-class UserUpdate(Resource):
+class UserUpdateAndFetch(Resource):
     """
     user Update Endpoint
     """
@@ -82,6 +82,14 @@ class UserUpdate(Resource):
     def put(self, user_id):
         """
         Put method to update a user's attributes.
+
+        Arguments:
+            user_id (str): The ID of the user to update.
+
+        Returns:
+            json: A JSON representation of the updated user.
+            error: An error message if the user
+            is not found or input data is invalid.
         """
         user_data = api.payload
 
@@ -96,10 +104,9 @@ class UserUpdate(Resource):
 
         # Verify input data
         if (
-            user_data['first_name'] == ''
-            or user_data['last_name'] == ''
-            or user_data['email'] == ''
-            or user_data['password'] == ''
+            user_data.get('first_name') == ''
+            or user_data.get('last_name') == ''
+            or user_data.get('email') == ''
         ):
             return {'error': 'Invalid input data'}, 400
 
@@ -117,3 +124,27 @@ class UserUpdate(Resource):
             'last_name': user.last_name,
             'email': user.email
         }, 201
+
+    @api.response(200, 'Success')
+    @api.response(404, 'User not found')
+    def get(self, user_id):
+        """
+        Get a user by id
+
+        Arguments:
+            user_id (str): The ID of the user to retrieve.
+
+        Returns:
+            json: A JSON representation of the user.
+            error: An error message if the user is not found.
+        """
+        user = facade.get_user(user_id)
+        if not user:
+            return {'error': 'User not found'}, 404
+
+        return {
+            'id': user.id,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
+        }, 200
