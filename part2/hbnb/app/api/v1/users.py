@@ -20,7 +20,7 @@ user_model = api.model('User', {
 })
 
 
-@api.route('/users/')
+@api.route('/')
 class UserList(Resource):
     """
     User Registration and Listing Endpoint
@@ -64,12 +64,13 @@ class UserList(Resource):
 
     @api.response(200, 'Success')
     @api.doc(description="Get list of users")
+    @api.marshal_list_with(user_model)
     def get(self):
         """get list of users"""
         return facade.get_all_users(), 200
 
 
-@api.route('/users/<string:user_id>')
+@api.route('/<string:user_id>')
 class UserUpdateAndFetch(Resource):
     """
     user Update Endpoint

@@ -53,7 +53,7 @@ class HBnBFacade:
             user_id (str): The ID of the user to retrieve.
 
         Returns:
-            uiser (User or None): The User object if found, else None.
+            user (User or None): The User object if found, else None.
         """
         return self.user_repo.get(user_id)
 
