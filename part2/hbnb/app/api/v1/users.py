@@ -103,6 +103,7 @@ class UserUpdateAndFetch(Resource):
         if not user:
             return {'error': 'User not found'}, 404
 
+        # Verify email uniqueness if changed
         user_with_email = facade.get_user_by_email(user_data['email'])
         if user_with_email and user_with_email.id != user_id:
             return {'error': 'Email already registered'}, 400
@@ -115,13 +116,14 @@ class UserUpdateAndFetch(Resource):
         ):
             return {'error': 'Invalid input data'}, 400
 
-        # verify email format (simple check)
+        # Verify email format (simple check)
         if (
             user_data['email'].count('@') != 1
             or '.' not in user_data['email'].split('@')[1]
         ):
             return {'error': 'Invalid input data'}, 400
 
+        # Update user
         facade.update_user(user_id, user_data)
         return {
             'id': user.id,
