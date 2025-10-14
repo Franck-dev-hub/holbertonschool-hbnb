@@ -31,13 +31,19 @@ class HBnBFacade:
             user (User): The created User object.
         """
         user = User(
-            user_data["first_name"],
-            user_data["last_name"],
-            user_data["email"],
-            user_data["password"]
+            user_data.get("first_name"),
+            user_data.get("last_name"),
+            user_data.get("email"),
+            user_data.get("password")
         )
         self.user_repo.add(user)
         return user
+
+    def get_all_users(self):
+        """
+        Get all users from the user repository.
+        """
+        return self.user_repo.get_all()
 
     def get_user(self, user_id):
         """

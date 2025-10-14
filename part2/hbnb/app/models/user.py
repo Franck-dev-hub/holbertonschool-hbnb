@@ -2,6 +2,7 @@
 Class for handling User objects in the HBNB project.
 """
 from app.models.base import BaseModel
+import json
 
 
 class User(BaseModel):
@@ -10,12 +11,12 @@ class User(BaseModel):
     """
 
     def __init__(
-            self,
-            first_name="",
-            last_name="",
-            email="",
-            is_admin=False,
-            password=""
+        self,
+        first_name="",
+        last_name="",
+        email="",
+        is_admin=False,
+        password=""
     ):
         """
         User class constructor
@@ -33,3 +34,6 @@ class User(BaseModel):
         self.email = email
         self.is_admin = is_admin
         self.password = password
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
