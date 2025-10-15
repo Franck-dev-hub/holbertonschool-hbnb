@@ -130,7 +130,7 @@ class UserUpdateAndFetch(Resource):
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email
-        }, 201
+        }, 200
 
     @api.response(200, 'Success')
     @api.response(404, 'User not found')

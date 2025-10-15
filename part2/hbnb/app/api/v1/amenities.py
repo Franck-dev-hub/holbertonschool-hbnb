@@ -112,4 +112,4 @@ class AmenityResource(Resource):
         facade.update_amenity(amenity_id, amenity)
         return {
             "message": "Amenity updated successfully"
-        }, 201
+        }, 200
