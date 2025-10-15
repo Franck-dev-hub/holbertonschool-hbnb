@@ -1,7 +1,8 @@
 from app.persistence.repository import InMemoryRepository
-from app.models.place import Place
 from app.models.user import User
 from app.models.amenity import Amenity
+from app.models.place import Place
+from app.models.review import Review
 
 
 class HBnBFacade:
@@ -18,6 +19,8 @@ class HBnBFacade:
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
+
+    # ----- USER METHODS -----
     """
     --User Methods--
     """
@@ -87,6 +90,7 @@ class HBnBFacade:
     --End of User Methods--
     """
 
+    # ----- AMENITY METHODS -----
     """
     --amenity METHODS--
     """
@@ -140,7 +144,7 @@ class HBnBFacade:
     --End of amenity METHODS--
     """
 
-    # --------PLACE METHODS--------
+    # ----- PLACE METHODS -----
     def create_place(self, place_data):
         place = Place(**place_data)
         self.place_repo.add(place)
@@ -161,3 +165,31 @@ class HBnBFacade:
                 setattr(place, key, value)
         self.place_repo.update(place_id, place_data)
         return place
+
+    # ----- REVIEW METHODS -----
+    def create_review(self, review_data):
+        review = Review(**review_data)
+        self.review_repo.add(review)
+        return review
+
+    def get_review(self, review_id):
+        return self.review_repo.get(review_id)
+
+    def get_all_reviews(self):
+        return self.review_repo.get_all()
+
+    def get_reviews_by_place(self, place_id):
+        place = self.place_repo.get(place_id)
+        return place.reviews
+
+    def update_review(self, review_id, review_data):
+        review = self.review_repo.get(review_id)
+        if not review:
+            return None
+        for key, value in review_data.items():
+            setattr(review, key, value)
+        self.review_repo.update(review_id, review_data)
+        return review
+
+    def delete_review(self, review_id):
+        self.review_repo.delete(review_id)
