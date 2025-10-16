@@ -2,16 +2,32 @@ from app.models.base import BaseModel
 
 
 class Place(BaseModel):
-    def __init__(self, title, description, price, latitude, longitude, owner):
+    def __init__(self, title, price, latitude, longitude, owner_id, rooms, owner, description=None, capacity=0, surface=0, amenities=[], reviews=[]):
         super().__init__()
-        self.title = title
+        if title is not None and 0 < len(title) <= 100:
+            self.__title = title
+        else:
+            raise ValueError
         self.description = description
-        self.price = price
-        self.latitude = latitude
-        self.longitude = longitude
+        if price is not None and price >= 0:
+            self.__price = price
+        else:
+            raise ValueError
+        if latitude is not None and -90.0 <= latitude <= 90.0:
+            self.__latitude = latitude
+        else:
+            raise ValueError
+        if longitude is not None and -180.0 <= longitude <= 180.0:
+            self.__longitude = longitude
+        else:
+            raise ValueError
+        self.owner_id = owner_id
         self.owner = owner
-        self.reviews = []  # List to store related reviews
-        self.amenities = []  # List to store related amenities
+        self.rooms = rooms
+        self.capacity = capacity
+        self.surface = surface
+        self.reviews = []
+        self.amenities = []
 
     def add_review(self, review):
         """Add a review to the place."""
@@ -22,40 +38,45 @@ class Place(BaseModel):
         self.amenities.append(amenity)
 
     @property
+    def title(self):
+        return self.__title
+
+    @title.setter
+    def title(self, title):
+        if title is not None and 0 < len(title) <= 100:
+            self.__title = title
+        else:
+            raise ValueError
+
+    @property
     def price(self):
-        return self._price
+        return self.__price
 
     @price.setter
-    def price(self, value):
-        """Validates that price is a float >= 0, otherwise raises an exception."""
-        if not isinstance(value, (float, int)):
-            raise ValueError("The price must be a number (float or int)")
-        if float(value) < 0:
-            raise ValueError("The price must be greater than or equal to 0")
-        self._price = float(value)
+    def price(self, price):
+        if price is not None and price >= 0:
+            self.__price = price
+        else:
+            raise ValueError
 
     @property
     def latitude(self):
-        return self._latitude
+        return self.__latitude
 
     @latitude.setter
-    def latitude(self, value):
-        """Validates that the latitude is between -90 and 90."""
-        if not isinstance(value, (float, int)):
-            raise ValueError("The latitude must be a number (float or int)")
-        if float(value) < -90 or float(value) > 90:
-            raise ValueError("The latitude must be between -90 and 90")
-        self._latitude = float(value)
+    def latitude(self, latitude):
+        if latitude is not None and -90.0 <= latitude <= 90.0:
+            self.__latitude = latitude
+        else:
+            raise ValueError
 
     @property
     def longitude(self):
-        return self._longitude
+        return self.__longitude
 
     @longitude.setter
-    def longitude(self, value):
-        """Validates that the longitude is between -180 and 180."""
-        if not isinstance(value, (float, int)):
-            raise ValueError("The longitude must be a number (float or int)")
-        if float(value) < -180 or float(value) > 180:
-            raise ValueError("The longitude must be between -180 and 180")
-        self._longitude = float(value)
+    def longitude(self, longitude):
+        if longitude is not None and -180.0 <= longitude <= 180.0:
+            self.__longitude = longitude
+        else:
+            raise ValueError
