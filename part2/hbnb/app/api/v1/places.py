@@ -32,7 +32,9 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    'amenities': fields.List(fields.String, required=True, description="List of amenities ID's")
+    'owner': fields.Nested(user_model, description='Owner of the place'),
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
+    'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
 })
 
 @api.route('/')
@@ -151,3 +153,27 @@ class PlaceResource(Resource):
             place.add_amenity(facade.get_amenity(amenity["id"]))
 
         return {'message': 'Place updated successfully'}, 200
+
+@api.route('/<place_id>/reviews')
+class PlaceReviewList(Resource):
+    @api.response(200, 'List of reviews for the place retrieved successfully')
+    @api.response(404, 'Place not found')
+    def get(self, place_id):
+        """
+        Retrieve all reviews for a specific place
+        """
+        existing_place = facade.get_place(place_id)
+        if not existing_place:
+            return {'error': 'Place not found'}, 404
+
+        review_list = facade.get_reviews_by_place(place_id)
+
+        reviews =[]
+        for review in review_list:
+            reviews.append({
+                'id': review.id,
+                'title': review.title,
+                'text': review.text,
+                'rating': review.rating
+        })
+        return reviews, 200
