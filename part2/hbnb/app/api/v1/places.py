@@ -1,3 +1,4 @@
+from typing import Required
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
 
@@ -5,15 +6,15 @@ api = Namespace('places', description='Place operations')
 
 # Define the models for related entities
 amenity_model = api.model('PlaceAmenity', {
-    'id': fields.String(description='Amenity ID'),
-    'name': fields.String(description='Name of the amenity')
+    'id': fields.String(required=True, description='Amenity ID'),
+    'name': fields.String(required=True, description='Name of the amenity')
 })
 
 user_model = api.model('PlaceUser', {
-    'id': fields.String(description='User ID'),
-    'first_name': fields.String(description='First name of the owner'),
-    'last_name': fields.String(description='Last name of the owner'),
-    'email': fields.String(description='Email of the owner')
+    'id': fields.String(required=True, description='User ID'),
+    'first_name': fields.String(required=True, description='First name of the owner'),
+    'last_name': fields.String(required=True, description='Last name of the owner'),
+    'email': fields.String(Required=True, description='Email of the owner')
 })
 
 # Adding the review model
@@ -32,11 +33,12 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    'amenities': fields.List(fields.String, required=True, description="List of amenities ID's")
+    'amenities': fields.List(fields.String, required=True, description="List of amenities ID's"),
     'owner': fields.Nested(user_model, description='Owner of the place'),
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
     'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
 })
+
 
 @api.route('/')
 class PlaceList(Resource):
@@ -97,6 +99,7 @@ class PlaceList(Resource):
                 'surface': place.surface,
             })
         return places, 200
+
 
 @api.route('/<place_id>')
 class PlaceResource(Resource):
