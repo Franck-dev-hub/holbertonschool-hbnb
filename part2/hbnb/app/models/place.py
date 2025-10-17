@@ -2,7 +2,7 @@ from app.models.base import BaseModel
 
 
 class Place(BaseModel):
-    def __init__(self, title, price, latitude, longitude, owner_id, rooms, owner, description=None, capacity=0, surface=0, amenities=[], reviews=[]):
+    def __init__(self, title, price, latitude, longitude, owner_id, rooms, description=None, capacity=0, surface=0, amenities=[], reviews=[]):
         super().__init__()
         if title is not None and 0 < len(title) <= 100:
             self.__title = title
@@ -21,8 +21,13 @@ class Place(BaseModel):
             self.__longitude = longitude
         else:
             raise ValueError
+        if rooms <= 0:
+            raise ValueError
+        if surface < 0:
+            raise ValueError
+        if capacity <= 0:
+            raise ValueError
         self.owner_id = owner_id
-        self.owner = owner
         self.rooms = rooms
         self.capacity = capacity
         self.surface = surface
