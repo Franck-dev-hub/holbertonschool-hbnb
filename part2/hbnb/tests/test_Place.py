@@ -237,7 +237,11 @@ class TestPlaceEndpoints(unittest.TestCase):
             "price": 3200,
             "latitude": 12,
             "longitude": 34,
-            "owner_id": owner_id
+            "owner_id": owner_id,
+            "amenities": [],
+            "rooms": 2,
+            "capacity": 3,
+            "surface": 2
         })
         self.assertEqual(response.status_code, 201)
         self.assertTrue(response.json["id"])
@@ -245,6 +249,9 @@ class TestPlaceEndpoints(unittest.TestCase):
         self.assertEqual(response.json["description"], "some random Appartement")
         self.assertEqual(response.json["latitude"], 12)
         self.assertEqual(response.json["longitude"], 34)
+        self.assertEqual(response.json["rooms"], 2)
+        self.assertEqual(response.json["capacity"], 3)
+        self.assertEqual(response.json["surface"], 2)
         self.assertTrue(response.json["owner_id"])
 
         placeid = response.json["id"]
@@ -257,6 +264,10 @@ class TestPlaceEndpoints(unittest.TestCase):
         self.assertEqual(response.json["longitude"], 34)
         self.assertTrue(response.json["owner_id"])
         self.assertTrue(response.json["amenities"])
+        self.assertEqual(response.json["rooms"], 2)
+        self.assertEqual(response.json["capacity"], 3)
+        self.assertEqual(response.json["surface"], 2)
+        self.assertTrue(response.json["owner_id"])
 
     def test_fetch_place_invalid_id(self):
         """

@@ -96,12 +96,12 @@ class UserUpdateAndFetch(Resource):
             error: An error message if the user
             is not found or input data is invalid.
         """
-        user_data = api.payload
-
         # Verify user exists
         user = facade.get_user(user_id)
         if not user:
             return {'error': 'User not found'}, 404
+
+        user_data = api.payload
 
         # Verify email uniqueness if changed
         user_with_email = facade.get_user_by_email(user_data['email'])
