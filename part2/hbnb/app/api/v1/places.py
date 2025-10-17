@@ -32,9 +32,12 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    'owner': fields.Nested(user_model, description='Owner of the place'),
-    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
-    'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
+    #'owner': fields.Nested(user_model, description='Owner of the place'),
+    'amenities': fields.List(fields.String(description="Id of amenity"), description='List of amenities'),
+    #'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
+    'rooms': fields.Integer(required=True, description='rooms'),
+    'surface': fields.Float(required=True, description='surface'),
+    'capacity': fields.Integer(required=True, description='capacity'),
 })
 
 
@@ -51,15 +54,17 @@ class PlaceList(Resource):
         if not existing_user:
             return {'error': 'User not found'}, 404
 
-        place_data["owner"] = existing_user
-
+        for amenity in place_data["amenities"]:
+            existing_amenity = facade.get_amenity(amenity)
+            if not existing_amenity:
+                return {'error': 'Amenity not found'}, 404
         try:
             new_place = facade.create_place(place_data)
         except ValueError:
             return {'error': 'Invalid input data'}, 400
 
-        for amenity in place_data["amenities"]:
-            new_place.add_amenity(facade.get_amenity(amenity["id"]))
+        for amenity in place_data.get("amenities"):
+            new_place.add_amenity(facade.get_amenity(amenity))
 
         return {
             'id': new_place.id,
