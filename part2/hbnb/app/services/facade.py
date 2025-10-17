@@ -159,14 +159,7 @@ class HBnBFacade:
         return self.place_repo.get_all()
 
     def update_place(self, place_id, place_data):
-        place = self.place_repo.get(place_id)
-        if not place:
-            return None
-        for key, value in place_data.items():
-            if key is not "amenities" and key is not "reviews":
-                setattr(place, key, value)
         self.place_repo.update(place_id, place_data)
-        return place
 
     # ----- REVIEW METHODS -----
     def create_review(self, review_data):

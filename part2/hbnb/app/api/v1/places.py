@@ -1,19 +1,22 @@
+from os import error
+from typing import Required
 from flask_restx import Namespace, Resource, fields
+from jsonschema.validators import validate
 from app.services import facade
 
 api = Namespace('places', description='Place operations')
 
 # Define the models for related entities
 amenity_model = api.model('PlaceAmenity', {
-    'id': fields.String(description='Amenity ID'),
-    'name': fields.String(description='Name of the amenity')
+    'id': fields.String(required=True, description='Amenity ID'),
+    'name': fields.String(required=True, description='Name of the amenity')
 })
 
 user_model = api.model('PlaceUser', {
-    'id': fields.String(description='User ID'),
-    'first_name': fields.String(description='First name of the owner'),
-    'last_name': fields.String(description='Last name of the owner'),
-    'email': fields.String(description='Email of the owner')
+    'id': fields.String(required=True, description='User ID'),
+    'first_name': fields.String(required=True, description='First name of the owner'),
+    'last_name': fields.String(required=True, description='Last name of the owner'),
+    'email': fields.String(Required=True, description='Email of the owner')
 })
 
 # Adding the review model
@@ -32,17 +35,18 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    #'owner': fields.Nested(user_model, description='Owner of the place'),
-    'amenities': fields.List(fields.String(description="Id of amenity"), description='List of amenities'),
-    #'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
+    # 'owner': fields.Nested(user_model, description='Owner of the place'),
+    'amenities': fields.List(fields.String(description="Id of amenity"), required=True, description='List of amenities'),
+    # 'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
     'rooms': fields.Integer(required=True, description='rooms'),
     'surface': fields.Float(required=True, description='surface'),
     'capacity': fields.Integer(required=True, description='capacity'),
 })
 
+
 @api.route('/')
 class PlaceList(Resource):
-    @api.expect(place_model)
+    @api.expect(place_model, validate=True)
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
     def post(self):
@@ -57,6 +61,10 @@ class PlaceList(Resource):
             existing_amenity = facade.get_amenity(amenity)
             if not existing_amenity:
                 return {'error': 'Amenity not found'}, 404
+
+        if len(place_data["description"]) > 500:
+            return {"error": 'Invalid input data'}, 400
+
         try:
             new_place = facade.create_place(place_data)
         except ValueError:
@@ -102,6 +110,7 @@ class PlaceList(Resource):
             })
         return places, 200
 
+
 @api.route('/<place_id>')
 class PlaceResource(Resource):
     @api.response(200, 'Place details retrieved successfully')
@@ -109,6 +118,9 @@ class PlaceResource(Resource):
     def get(self, place_id):
         """Get place details by ID"""
         place = facade.get_place(place_id)
+        if not place:
+            return {"error": "Place not found"}, 404
+
         owner = facade.get_user(place.owner_id)
 
         amenities = [{
@@ -137,25 +149,47 @@ class PlaceResource(Resource):
             'amenities': amenities
         }, 200
 
-    @api.expect(place_model)
+    @api.expect(place_model, validate=True)
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
     def put(self, place_id):
         """Update a place's information"""
         place_data = api.payload
-        place = facade.get_place(place_id)
 
+        place = facade.get_place(place_id)
         if not place:
             return {'error': 'Place not found'}, 404
 
-        updated_place = facade.update_place(place_id, place_data)
-        if not updated_place:
+        owner = facade.get_user(place_data["owner_id"])
+        if not owner:
+            return {'error': 'User not found'}, 404
+
+        if place_data["title"] == "":
             return {'error': 'Invalid input data'}, 400
 
-        place.amenities = []
-        for amenity in place_data["amenities"]:
-            place.add_amenity(facade.get_amenity(amenity["id"]))
+        if len(place_data["description"]) > 500:
+            return {'error': 'Invalid input data'}, 400
+
+        if place_data["price"] < 0:
+            return {'error': 'Invalid input data'}, 400
+
+        if place_data["latitude"] < -90 or place_data["latitude"] > 90:
+            return {'error': 'Invalid input data'}, 400
+
+        if place_data["longitude"] < -180 or place_data["longitude"] > 180:
+            return {'error': 'Invalid inpuit data'}, 400
+
+        if place_data["rooms"] <= 0:
+            return {'error': 'Invalid input data'}, 400
+
+        if place_data["surface"] <= 0:
+            return {'error': 'Invalid input data'}, 400
+
+        if place_data["capacity"] <= 0:
+            return {'error': 'Invalid input data'}, 400
+
+        facade.update_place(place_id, place_data)
 
         return {'message': 'Place updated successfully'}, 200
 
