@@ -146,6 +146,8 @@ class HBnBFacade:
 
     # ----- PLACE METHODS -----
     def create_place(self, place_data):
+        if 'rooms' not in place_data:
+            raise ValueError("The field 'rooms' is requirement.")
         place = Place(**place_data)
         self.place_repo.add(place)
         return place
