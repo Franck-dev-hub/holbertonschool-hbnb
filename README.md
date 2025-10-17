@@ -75,22 +75,21 @@ Comming soon.
 │   ├── README.md
 │   └── mermaid
 ├── part2
-│   └── hbnb
-│       ├──── README.md
-│       ├── app
-│       │   ├── __init__.py
-│       │   ├── __pycache__
-│       │   ├── api
-│       │   ├── models
-│       │   ├── persistence
-│       │   └── services
-│       ├── config.py
-│       ├── main.py
-│       ├── pyproject.toml
-│       ├── requirements.txt
-│       ├── run.py
-│       ├── tree.txt
-│       └── uv.lock
+│   ├──── README.md
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── api
+│   │   ├── models
+│   │   ├── persistence
+│   │   └── services
+│   ├── config.py
+│   ├── main.py
+│   ├── pyproject.toml
+│   ├── requirements.txt
+│   ├── run.py
+│   ├── tree.txt
+│   └── uv.lock
 ├── tests
 │   ├── test_Amenity.py
 │   ├── test_Place.py
