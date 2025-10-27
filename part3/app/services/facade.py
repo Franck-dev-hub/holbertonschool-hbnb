@@ -3,6 +3,7 @@ from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
 from app.models.review import Review
+from app.models.user import hash_password
 
 
 class HBnBFacade:
@@ -35,11 +36,12 @@ class HBnBFacade:
         Returns:
             user (User): The created User object.
         """
+        hashed_password = hash_password(user_data.get("password"))
         user = User(
             user_data.get("first_name"),
             user_data.get("last_name"),
             user_data.get("email"),
-            user_data.get("password")
+            hashed_password
         )
         self.user_repo.add(user)
         return user
