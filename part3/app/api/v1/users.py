@@ -21,6 +21,10 @@ user_model = api.model('User', {
         required=True,
         description='Email of the user'
     ),
+    'password':fields.String(
+        required=True,
+        description='The password of the user'
+    )
 })
 
 
