@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 api = Namespace('users', description='User operations')
 
@@ -38,9 +39,14 @@ class UserList(Resource):
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
     @api.doc(description="Register a new user")
+    @jwt_required()
     def post(self):
         """Register a new user"""
         user_data = api.payload
+
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
 
         # Simulate email uniqueness check
         existing_user = facade.get_user_by_email(user_data['email'])
@@ -88,6 +94,7 @@ class UserUpdateAndFetch(Resource):
     @api.response(404, 'User not found')
     @api.response(400, 'Invalid input data')
     @api.response(400, 'Email already registered')
+    @jwt_required()
     def put(self, user_id):
         """
         Put method to update a user's attributes.
@@ -101,6 +108,10 @@ class UserUpdateAndFetch(Resource):
             is not found or input data is invalid.
         """
         # Verify user exists
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
+
         user = facade.get_user(user_id)
         if not user:
             return {'error': 'User not found'}, 404
