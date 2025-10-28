@@ -1,4 +1,5 @@
 from app.models.base import BaseModel
+from app import bcrypt
 from app import db
 from sqlalchemy.orm import validates
 import re
@@ -19,8 +20,13 @@ class User(BaseModel):
         self.first_name = first_name.strip()
         self.last_name = last_name.strip()
         self.is_admin = is_admin
+
+        self.password = password
         if password:
             self.hash_password(password)
+
+    def __repr__(self):
+        return (self.password)
 
     def hash_password(self, password: str):
         """Hashes the password before storing it."""
