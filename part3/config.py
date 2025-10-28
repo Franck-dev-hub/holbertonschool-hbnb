@@ -9,8 +9,9 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = "dev_secret_key123"
-    SQLALCHEMY_DATABASE_URI = "sqlite://development.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///development.db"
     SQLALCHEMY_TRACK_MODIFICATION = False
+
 
 config = {
     'development': DevelopmentConfig,

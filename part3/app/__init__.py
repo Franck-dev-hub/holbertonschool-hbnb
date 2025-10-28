@@ -1,8 +1,13 @@
 from flask import Flask
 from flask_restx import Api
-from flask_jwt_extended import JWTManager
-from app.database import db
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+jwt = JWTManager()
 
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
@@ -11,14 +16,11 @@ from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.api.v1.protected import api as protected_ns
 
-# global jwt manager
-jwt = JWTManager()
-
 
 def create_app(config_class="config.DevelopmentConfig"):
-    # initializing app
     app = Flask(__name__)
     app.config.from_object(config_class)
+
     api = Api(
         app, version='1.0',
         title='HBnB API',
@@ -26,7 +28,7 @@ def create_app(config_class="config.DevelopmentConfig"):
         doc='/api/v1/'
     )
 
-    CORS(app, ressources={
+    CORS(app, resources={
         r"/*": {
             "origins": ["http://localhost:5000", "http://127.0.0.1:5000"],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -38,9 +40,7 @@ def create_app(config_class="config.DevelopmentConfig"):
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(reviews_ns, path='/api/v1/reviews')
-    # Register the auth namespace
     api.add_namespace(auth_ns, path="/api/v1/auth")
-    # import protected route
     api.add_namespace(protected_ns, path="/api/v1/protected")
 
     db.init_app(app)
