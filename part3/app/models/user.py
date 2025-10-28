@@ -1,7 +1,7 @@
 from app.models.base import BaseModel
 from app import db
 from sqlalchemy.orm import validates
-from app import bcrypt
+#from app import bcrypt
 import re
 
 
