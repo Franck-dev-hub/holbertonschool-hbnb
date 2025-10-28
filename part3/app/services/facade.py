@@ -1,4 +1,4 @@
-from app.persistence.repository import InMemoryRepository
+from app.persistence.repository import SQLAlchemyRepository
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
@@ -7,6 +7,15 @@ from app.models.review import Review
 class HBnBFacade:
     """Facade class to manage users, places, reviews, and amenities."""
     def __init__(self):
+        """
+        Facade constructor to initialize repositories for
+        users, places, reviews, and amenities.
+        """
+        self.user_repo = SQLAlchemyRepository(User)
+        self.place_repo = SQLAlchemyRepository(Place)
+        self.review_repo = SQLAlchemyRepository(Review)
+        self.amenity_repo = SQLAlchemyRepository(Amenity)
+
         self.user_repo = InMemoryRepository()
         self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
@@ -78,7 +87,8 @@ class HBnBFacade:
 
     def get_reviews_by_place(self, place_id):
         place = self.place_repo.get(place_id)
-        return place.reviews
+        if place:
+            return place.reviews
 
     def update_review(self, review_id, review_data):
         review = self.review_repo.get(review_id)

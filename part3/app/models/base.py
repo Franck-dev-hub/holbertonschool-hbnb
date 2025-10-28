@@ -3,7 +3,6 @@ import uuid
 from datetime import datetime
 from abc import abstractmethod
 
-
 class BaseModel(db.Model):
     __abstract__ = True
 

@@ -1,4 +1,10 @@
 from abc import ABC, abstractmethod
+from sqlalchemy.orm import declarative_base
+from app.database import db
+
+# Base for orm sqlalchemy
+Base = declarative_base()
+
 
 class Repository(ABC):
     @abstractmethod
@@ -50,3 +56,54 @@ class InMemoryRepository(Repository):
 
     def get_by_attribute(self, attr_name, attr_value):
         return next((obj for obj in self._storage.values() if getattr(obj, attr_name) == attr_value), None)
+
+
+class SQLAlchemyRepository(Repository):
+    """
+    A repository implementation that uses SQLAlchemy for data storage and retrieval.
+
+    This class provides a simple interface for interacting with database models,
+    allowing basic operations such as adding, retrieving, updating, or deleting
+    records through SQLAlchemy sessions.
+
+    Attributes
+    ----------
+    model : object
+        The SQLAlchemy model class associated with this repository.
+    """
+    def __init__(self, model):
+        """
+        Initialize the class with a model object for storage.
+
+        Parameters
+        ----------
+        model : object
+            The model to be stored for later access or reference.
+        """
+        self.model = model
+
+    def add(self, obj):
+        db.session.add(obj)
+        db.session.commit()
+
+    def get(self, obj_id):
+        return self.model.query.get(obj_id)
+
+    def get_all(self):
+        return self.model.query.getall()
+
+    def update(self, obj_id, data):
+        obj = self.get(obj_id)
+        if obj:
+            for key, value in data.items():
+                setattr(obj, key, value)
+            db.session.commit()
+
+    def delete(self, obj_id):
+        obj = self.get(obj_id)
+        if obj:
+            db.session.delete(obj)
+            db.session.commit()
+
+    def get_by_attribute(self, attr_name, attr_value):
+        return self.model.query.filter_by(**{attr_name: attr_value}).first()
