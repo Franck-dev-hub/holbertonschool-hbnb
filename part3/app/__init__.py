@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
-from config import config
+from app.database import db
 
+from config import config
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
 from app.api.v1.amenities import api as amenities_ns
@@ -26,6 +27,9 @@ def create_app():
 
     # initiaalize the JWTManager
     jwt.init_app(app)
+
+    # initiaalize db
+    db.init_app(app)
 
     # load config
     app.config.from_object(config["development"])
