@@ -18,7 +18,7 @@ jwt = JWTManager()
 bcrypt = Bcrypt()
 
 
-def create_app(config_class=config.DevelopmentConfig):
+def create_app(config_class="config.DevelopmentConfig"):
     # initializing app
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -41,9 +41,7 @@ def create_app(config_class=config.DevelopmentConfig):
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(reviews_ns, path='/api/v1/reviews')
-    # Register the auth namespace
     api.add_namespace(auth_ns, path="/api/v1/auth")
-    # import protected route
     api.add_namespace(protected_ns, path="/api/v1/protected")
 
     db.init_app(app)

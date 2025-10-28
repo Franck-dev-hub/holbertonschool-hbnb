@@ -1,4 +1,4 @@
-from app.persistence.repository import SQLAlchemyRepository
+from app.persistence.repository import SQLAlchemyRepository, InMemoryRepository
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
@@ -11,15 +11,16 @@ class HBnBFacade:
         Facade constructor to initialize repositories for
         users, places, reviews, and amenities.
         """
-        self.user_repo = SQLAlchemyRepository(User)
-        self.place_repo = SQLAlchemyRepository(Place)
-        self.review_repo = SQLAlchemyRepository(Review)
-        self.amenity_repo = SQLAlchemyRepository(Amenity)
+        
+        #self.user_repo = SQLAlchemyRepository(User)
+        #self.place_repo = SQLAlchemyRepository(Place)
+        #self.review_repo = SQLAlchemyRepository(Review)
+        #self.amenity_repo = SQLAlchemyRepository(Amenity)
 
-        #self.user_repo = InMemoryRepository()
-        #self.place_repo = InMemoryRepository()
-        #self.review_repo = InMemoryRepository()
-        #self.amenity_repo = InMemoryRepository()
+        self.user_repo = InMemoryRepository()
+        self.place_repo = InMemoryRepository()
+        self.review_repo = InMemoryRepository()
+        self.amenity_repo = InMemoryRepository()
 
     # ----- USER METHODS -----
     def create_user(self, user_data):
