@@ -1,5 +1,5 @@
 from os import error
-from typing import Required
+from typing_extensions import Required
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from jsonschema.validators import validate
@@ -45,7 +45,7 @@ place_model = api.model("Place", {
 })
 
 
-@api.route("/')
+@api.route('/')
 class PlaceList(Resource):
     @api.expect(place_model, validate=True)
     @api.response(201, 'Place successfully created')
@@ -117,7 +117,7 @@ class PlaceList(Resource):
         return places, 200
 
 
-@api.route("/<place_id>')
+@api.route("/<place_id>")
 class PlaceResource(Resource):
     @api.response(200, "Place details retrieved successfully")
     @api.response(404, "Place not found")
@@ -166,42 +166,42 @@ class PlaceResource(Resource):
 
         place = facade.get_place(place_id)
         if place.owner_id != current_user["id"] and not current_user["is_admin"]:
-            return {'error': 'Unauthorized action'}, 403
+            return {"error": "Unauthorized action"}, 403
 
         if not place:
-            return {"error: "Place not found"}, 404
+            return {"error": "Place not found"}, 404
 
         owner = facade.get_user(place_data["owner_id"])
         if not owner:
-            return {"error: "User not found"}, 404
+            return {"error": "User not found"}, 404
 
         if place_data["title"] == "":
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if len(place_data["description"]) > 500:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if place_data["price"] < 0:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if place_data["latitude"] < -90 or place_data["latitude"] > 90:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if place_data["longitude"] < -180 or place_data["longitude"] > 180:
-            return {"error: "Invalid inpuit data"}, 400
+            return {"error": "Invalid inpuit data"}, 400
 
         if place_data["rooms"] <= 0:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if place_data["surface"] <= 0:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         if place_data["capacity"] <= 0:
-            return {"error: "Invalid input data"}, 400
+            return {"error": "Invalid input data"}, 400
 
         facade.update_place(place_id, place_data)
 
-        return {"message: "Place updated successfully"}, 200
+        return {"message": "Place updated successfully"}, 200
 
 @api.route("/<place_id>/reviews")
 class PlaceReviewList(Resource):
