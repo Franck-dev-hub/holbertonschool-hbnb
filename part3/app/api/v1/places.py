@@ -1,5 +1,5 @@
 from os import error
-from typing import Required
+from typing_extensions import Required
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from jsonschema.validators import validate
@@ -45,7 +45,8 @@ place_model = api.model("Place", {
 })
 
 
-@api.route("/")
+
+@api.route('/')
 class PlaceList(Resource):
     @api.expect(place_model, validate=True)
     @api.response(201, 'Place successfully created')
@@ -166,7 +167,7 @@ class PlaceResource(Resource):
 
         place = facade.get_place(place_id)
         if place.owner_id != current_user["id"] and not current_user["is_admin"]:
-            return {'error': 'Unauthorized action'}, 403
+            return {"error": "Unauthorized action"}, 403
 
         if not place:
             return {"error": "Place not found"}, 404
