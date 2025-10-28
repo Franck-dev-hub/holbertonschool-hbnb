@@ -3,6 +3,7 @@ Flask RESTful API for managing amenities.
 """
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 api = Namespace('amenities', description='Amenity operations')
 
@@ -32,6 +33,7 @@ class AmenityList(Resource):
     @api.expect(amenity_model)
     @api.response(201, 'Amenity successfully created')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def post(self):
         """
         Register a new amenity
@@ -40,6 +42,11 @@ class AmenityList(Resource):
             Json of the newly created amenity
         """
         amenity = api.payload
+
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
+
         if amenity['name'] == '':
             return {'error': 'Invalid input data'}, 400
 
@@ -90,6 +97,7 @@ class AmenityResource(Resource):
     @api.response(200, 'Amenity updated successfully')
     @api.response(404, 'Amenity not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, amenity_id):
         """
         Update an amenity's information
@@ -103,6 +111,11 @@ class AmenityResource(Resource):
             success 200 Amenity updated
         """
         amenity = api.payload
+
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
+
         if amenity['name'] == '':
             return {'error': 'Invalid input data'}, 400
 
