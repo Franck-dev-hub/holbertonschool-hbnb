@@ -1,17 +1,9 @@
 from flask import Flask
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
-from flask_bcrypt import Bcrypt, bcrypt
-from app.database import db
-
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-
-db = SQLAlchemy()
-bcrypt = Bcrypt()
-jwt = JWTManager()
+from app.database import db
+from flask_cors import CORS
 
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
@@ -20,10 +12,9 @@ from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.api.v1.protected import api as protected_ns
 
-# global jwt manager
+bcrypt = Bcrypt()
 jwt = JWTManager()
 
-bcrypt = Bcrypt()
 
 def create_app(config_class="config.DevelopmentConfig"):
     app = Flask(__name__)
