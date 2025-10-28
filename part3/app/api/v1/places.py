@@ -1,5 +1,4 @@
 from os import error
-from typing import Required
 from flask_restx import Namespace, Resource, fields
 from jsonschema.validators import validate
 from app.services import facade

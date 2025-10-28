@@ -39,14 +39,14 @@ class UserList(Resource):
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
     @api.doc(description="Register a new user")
-    @jwt_required()
+    #@jwt_required()
     def post(self):
         """Register a new user"""
         user_data = api.payload
 
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
+        #current_user = get_jwt_identity()
+        #if not current_user.get('is_admin'):
+            #return {'error': 'Admin privileges required'}, 403
 
         # Simulate email uniqueness check
         existing_user = facade.get_user_by_email(user_data['email'])
@@ -67,7 +67,7 @@ class UserList(Resource):
             or '.' not in user_data['email'].split('@')[1]
         ):
             return {'error': 'Invalid input data'}, 400
-
+        print(user_data.get("password"))
         new_user = facade.create_user(user_data)
         return {
             'id': new_user.id,
