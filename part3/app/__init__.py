@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt, bcrypt
 from app.database import db
 
 from app.api.v1.places import api as places_ns
@@ -13,8 +14,10 @@ from app.api.v1.protected import api as protected_ns
 # global jwt manager
 jwt = JWTManager()
 
+bcrypt = Bcrypt()
 
-def create_app():
+
+def create_app(config_class=config.DevelopmentConfig):
     # initializing app
     app = Flask(__name__)
     app.config.from_object(config_class)

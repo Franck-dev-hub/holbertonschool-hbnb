@@ -5,3 +5,5 @@ flask-jwt-extended>=4.7.1
 sql>=2022.4.0
 sqlalchemy>=2.0.44
 flask-sqlalchemy
+bcrypt
+flask-bcrypt
