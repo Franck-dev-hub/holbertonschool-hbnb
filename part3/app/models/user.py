@@ -25,8 +25,6 @@ class User(BaseModel):
         if password:
             self.hash_password(password)
 
-    def __repr__(self):
-        return (self.password)
 
     def hash_password(self, password: str):
         """Hashes the password before storing it."""

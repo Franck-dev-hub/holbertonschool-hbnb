@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from sqlalchemy.orm import declarative_base
-from app.database import db
+from app.extensions import db
 
 # Base for orm sqlalchemy
 Base = declarative_base()

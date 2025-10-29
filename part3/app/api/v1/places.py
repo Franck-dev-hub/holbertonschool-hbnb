@@ -46,6 +46,7 @@ place_model = api.model("Place", {
 })
 
 
+
 @api.route('/')
 class PlaceList(Resource):
     @api.expect(place_model, validate=True)
