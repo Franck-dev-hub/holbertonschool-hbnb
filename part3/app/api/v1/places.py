@@ -1,10 +1,6 @@
-from os import error
-from typing_extensions import Required
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from jsonschema.validators import validate
 from app.services import facade
-from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 api = Namespace("places", description="Place operations")
 
@@ -62,7 +58,9 @@ class PlaceList(Resource):
         if not existing_user:
             return {"error": "User not found"}, 404
 
-        if place_data["owner_id"] != current_user["id"]:
+        print(place_data["owner_id"])
+        print(current_user)
+        if place_data["owner_id"] != current_user:
             return {"error": "Unauthorised action"}, 403
 
         for amenity in place_data["amenities"]:
@@ -130,6 +128,8 @@ class PlaceResource(Resource):
             return {"error": "Place not found"}, 404
 
         owner = facade.get_user(place.owner_id)
+        if not owner:
+            return {"error": "Owner not found"}, 404
 
         amenities = [{
             "id": amenity.id,
@@ -138,6 +138,7 @@ class PlaceResource(Resource):
 
         if not place:
             return {"error": "Place not found"}, 404
+
         return {
             'id': place.id,
             'title': place.title,
@@ -173,11 +174,13 @@ class PlaceResource(Resource):
         user_id = current_user.get('id')
 
         place = facade.get_place(place_id)
-        if not is_admin and place.owner_id != user_id:
-            return {'error': 'Unauthorized action'}, 403
+
 
         if not place:
             return {"error": "Place not found"}, 404
+
+        if not is_admin and place.owner_id != user_id:
+            return {'error': 'Unauthorized action'}, 403
 
         owner = facade.get_user(place_data["owner_id"])
         if not owner:
@@ -224,6 +227,8 @@ class PlaceReviewList(Resource):
             return {"error": "Place not found"}, 404
 
         review_list = facade.get_reviews_by_place(place_id)
+        if not review_list:
+            return {"error": "No review found"}, 404
 
         reviews =[]
         for review in review_list:

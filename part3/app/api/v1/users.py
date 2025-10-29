@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
-from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('users', description='User operations')
 
@@ -67,7 +67,7 @@ class UserList(Resource):
             or '.' not in user_data['email'].split('@')[1]
         ):
             return {'error': 'Invalid input data'}, 400
-        print(user_data.get("password"))
+
         new_user = facade.create_user(user_data)
         return {
             'id': new_user.id,
