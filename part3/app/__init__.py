@@ -28,6 +28,9 @@ def create_app(config_class="config.DevelopmentConfig"):
             "allow_headers": ["Content-Type", "Authorization"]
         }
     })
+    db.init_app(app)
+    bcrypt.init_app(app)
+    jwt.init_app(app)
 
     api.add_namespace(users_ns, path='/api/v1/users')
     api.add_namespace(places_ns, path='/api/v1/places')
@@ -35,8 +38,7 @@ def create_app(config_class="config.DevelopmentConfig"):
     api.add_namespace(reviews_ns, path='/api/v1/reviews')
     api.add_namespace(auth_ns, path="/api/v1/auth")
 
-    db.init_app(app)
-    bcrypt.init_app(app)
-    jwt.init_app(app)
+    with app.app_context():
+        from app.models import user, place, amenity, review
 
     return app
