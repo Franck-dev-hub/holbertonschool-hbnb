@@ -1,18 +1,20 @@
 from app.models.base import BaseModel
 from app import bcrypt
-from app import db
+from app.extensions import db
 from sqlalchemy.orm import validates
 import re
 
 
 class User(BaseModel):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
     email = db.Column(db.String(120), nullable=False, unique=True)
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    places = db.relationship('Place', backref="user", lazy=True)
+    reviews = db.relationship('Review', backref='user', lazy='select')
 
     def __init__(self, email, first_name, last_name, password=None, is_admin=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
