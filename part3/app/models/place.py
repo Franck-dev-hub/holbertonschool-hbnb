@@ -1,5 +1,11 @@
 from app.models.base import BaseModel
-from app import db
+from app.extensions import db
+
+# table association for amenities and places
+place_amenity = db.Table('place_amenity',
+    db.Column('place_id', db.String, db.ForeignKey('places.id'), primary_key=True),
+    db.Column('amenity_id', db.String, db.ForeignKey('amenities.id'), primary_key=True)
+)
 
 
 class Place(BaseModel):
@@ -10,6 +16,11 @@ class Place(BaseModel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
+
+    owner_id = db.Column(db.String, db.ForeignKey("users.id"), nullable=False)
+    amenities = db.relationship('Amenity', secondary=place_amenity, lazy='subquery',
+                              backref=db.backref('place', lazy=True))
+    reviews = db.relationship('Review', backref='place', lazy=True)
 
     def __init__(self, title, price, latitude, longitude, owner_id, rooms, description=None, capacity=0, surface=0, amenities=[], reviews=[]):
         super().__init__()

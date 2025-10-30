@@ -18,6 +18,8 @@ class Login(Resource):
     Class providing Authentication routes
     """
     @api.expect(login_model, validate=True)
+    @api.response(401, "Invalid credentials")
+    @api.response(200, "access_token")
     def post(self):
         """
         Authentication post request

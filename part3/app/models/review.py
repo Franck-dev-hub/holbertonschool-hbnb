@@ -1,5 +1,5 @@
-from app.models.model import BaseModel
-from app import db
+from app.models.base import BaseModel
+from app.extensions import db
 
 
 class Review(BaseModel):
@@ -7,6 +7,8 @@ class Review(BaseModel):
 
     text = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
+    place_id = db.Column(db.String, db.ForeignKey('places.id'), nullable=False)
 
     def __init__(self, title, text, rating, place_id, place, user_id, user):
         super().__init__()
@@ -38,7 +40,7 @@ class Review(BaseModel):
     @property
     def rating(self):
         return self.__rating
-    
+
     @rating.setter
     def rating(self, rating):
         if 1 <= rating <= 5:
