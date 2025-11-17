@@ -1,4 +1,14 @@
-/* Container for the place details */
+/* Place cards */
+.place-card {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Place infos section */
 .place-details {
   max-width: 800px;
   margin: 20px auto;
@@ -25,10 +35,10 @@
 }
 
 .review-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 12px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
