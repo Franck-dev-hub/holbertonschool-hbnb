@@ -1,32 +1,59 @@
-/* 
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks. 
-  You'll probably need to override some of theese styles.
-*/
-
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
+	background-color: #f4f4f4;
+	color: #333;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
+	background-color: #333;
+	color: #fff;
+	padding: 1rem;
 }
 
 nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 1rem;
+	color: #fff;
+	text-decoration: none;
+	margin-left: 1rem;
+}
+
+ul {
+	list-style-type: none;
 }
 
 main {
-    padding: 2rem;
+	padding: 2rem;
+}
+
+.place-card {
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	padding: 16px;
+	margin: 12px;
+	width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.place-card h3 {
+	margin-top: 0;
+}
+
+.details-button {
+	background-color: #007BFF;
+	color: #FFFFFF;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.details-button:hover {
+	background-color: #0056B3;
 }
