@@ -1,46 +1,3 @@
-// Example data
-const places = [
-  {
-    id: 1,
-    name: "Cozy Cottage",
-    host: "Alice",
-    pricePerNight: 120,
-    description: "A cozy cottage in the woods.",
-    amenities: ["WiFi", "Fireplace", "Kitchen"],
-    reviews: [
-      { user: "John", comment: "Loved it!", rating: 5 },
-      { user: "Emma", comment: "Very peaceful", rating: 4 }
-    ]
-  },
-  {
-    id: 2,
-    name: "Luxury Villa",
-    host: "Bob",
-    pricePerNight: 450,
-    description: "A luxurious villa with pool.",
-    amenities: ["Pool", "WiFi", "Parking"],
-    reviews: []
-  },
-  {
-    id: 3,
-    name: "City Apartment",
-    host: "Claude",
-    pricePerNight: 200,
-    description: "A nice place in town.",
-    amenities: ["WiFi"],
-    reviews: []
-  },
-  {
-    id: 4,
-    name: "Beach Bungalow",
-    host: "Daniel",
-    pricePerNight: 300,
-    description: "A nice holiday pied-a-terre.",
-    amenities: ["WiFi", "Parking"],
-    reviews: []
-  }
-];
-
 // Get the place name from URL
 const placeId = parseInt(new URLSearchParams(window.location.search).get("id"), 10);
 const place = places.find(p => p.id === placeId);
@@ -74,5 +31,29 @@ if (place) {
     });
   } else {
     reviewsSection.innerHTML += "<p>No reviews yet.</p>";
+  }
+}
+
+async function loadPlaces() {
+  try {
+    const response = await fetch("http://localhost:5000/api/v1/places", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (!response.ok) {
+      alert("Failed to fetch places");
+      return;
+    }
+
+    const data = await response.json();
+
+    setCookie("access_token", dataaccess_token);
+    updateButtons()
+    window.location.href = "index.html";
+
+  } catch (err) {
+    console.error("Login error:", err);
   }
 }
