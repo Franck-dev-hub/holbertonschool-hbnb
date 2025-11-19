@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/place.css">
 </head>
@@ -20,9 +21,23 @@
     </section>
     <section id="add-review">
       <h2>Add a Review</h2>
+        <p id="review-auth-message" style="display:none;">Veuillez vous connecter pour laisser un avis.</p>
         <form id="review-form">
+          <label for="review-title">Title:</label>
+          <input type="text" id="review-title" name="review-title" required>
+
           <label for="review-text">Review:</label>
           <textarea id="review-text" name="review-text" required></textarea>
+          
+          <label for="review-rating">Rating:</label>
+          <select id="review-rating" name="review-rating" required>
+            <option value="">Select a rating</option>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
           
           <button type="submit">Submit</button>
         </form>
