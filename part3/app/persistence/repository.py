@@ -90,7 +90,7 @@ class SQLAlchemyRepository(Repository):
         return self.model.query.get(obj_id)
 
     def get_all(self):
-        return self.model.query.getall()
+        return self.model.query.all()
 
     def update(self, obj_id, data):
         obj = self.get(obj_id)

@@ -21,13 +21,17 @@ def create_app(config_class="config.DevelopmentConfig"):
         doc='/api/v1/'
     )
 
-    CORS(app, resources={
-        r"/*": {
-            "origins": ["http://localhost:5000", "http://127.0.0.1:5000"],
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"]
+    allowed_origins = app.config.get("CORS_ORIGINS", ["*"])
+    CORS(
+        app,
+        resources={
+            r"/api/*": {
+                "origins": allowed_origins,
+                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                "allow_headers": ["Content-Type", "Authorization"]
+            }
         }
-    })
+    )
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)

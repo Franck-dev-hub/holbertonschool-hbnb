@@ -14,7 +14,7 @@ user_model = api.model("PlaceUser", {
     "id": fields.String(required=True, description="User ID"),
     "first_name": fields.String(required=True, description="First name of the owner"),
     "last_name": fields.String(required=True, description="Last name of the owner"),
-    "email": fields.String(Required=True, description="Email of the owner")
+    "email": fields.String(required=True, description="Email of the owner")
 })
 
 # Adding the review model
@@ -52,15 +52,14 @@ class PlaceList(Resource):
     def post(self):
         """Register a new place"""
         place_data = api.payload
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() or {}
+        current_user_id = current_user["id"] if isinstance(current_user, dict) else current_user
 
         existing_user = facade.get_user(place_data["owner_id"])
         if not existing_user:
             return {"error": "User not found"}, 404
 
-        print(place_data["owner_id"])
-        print(current_user)
-        if place_data["owner_id"] != current_user:
+        if place_data["owner_id"] != current_user_id:
             return {"error": "Unauthorised action"}, 403
 
         for amenity in place_data["amenities"]:
@@ -95,11 +94,8 @@ class PlaceList(Resource):
     @api.response(200, 'List of places retrieved successfully')
     def get(self):
         """Retrieve a list of all places"""
-        place_list = facade.get_all_places()
+        place_list = facade.get_all_places() or []
         places = []
-
-        if len(place_list) == 0:
-            return {"error": "No place found"}, 404
 
         for place in place_list:
             places.append({
@@ -167,11 +163,15 @@ class PlaceResource(Resource):
         """Update a place's information"""
         place_data = api.payload
     
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() or {}
 
         # Set is_admin default to False if not exists
-        is_admin = current_user.get('is_admin', False)
-        user_id = current_user.get('id')
+        if isinstance(current_user, dict):
+            is_admin = current_user.get('is_admin', False)
+            user_id = current_user.get('id')
+        else:
+            is_admin = False
+            user_id = current_user
 
         place = facade.get_place(place_id)
 
@@ -226,9 +226,7 @@ class PlaceReviewList(Resource):
         if not existing_place:
             return {"error": "Place not found"}, 404
 
-        review_list = facade.get_reviews_by_place(place_id)
-        if not review_list:
-            return {"error": "No review found"}, 404
+        review_list = facade.get_reviews_by_place(place_id) or []
 
         reviews =[]
         for review in review_list:

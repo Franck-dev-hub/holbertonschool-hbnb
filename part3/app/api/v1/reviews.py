@@ -9,7 +9,7 @@ review_model = api.model('Review', {
     'title': fields.String(required=True, description='Title of the review'),
     'text': fields.String(required=True, description='Text of the review'),
     'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
-    'user_id': fields.String(required=True, description='ID of the user'),
+    'user_id': fields.String(required=False, description='ID of the user'),
     'place_id': fields.String(required=True, description='ID of the place')
 })
 
@@ -25,9 +25,10 @@ class ReviewList(Resource):
         Register a new review
         """
         review_data = api.payload
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() or {}
+        user_id = current_user.get("id") if isinstance(current_user, dict) else current_user
 
-        review_data["user_id"] = current_user["id"]
+        review_data["user_id"] = user_id
 
         existing_user = facade.get_user(review_data["user_id"])
         if not existing_user:
@@ -37,11 +38,11 @@ class ReviewList(Resource):
         if not existing_place:
             return {'error': 'Place not found'}, 404
 
-        if existing_place.owner_id == current_user["id"]:
+        if existing_place.owner_id == user_id:
             return {'error': 'You cannot review your own place'}, 400
 
         for review in existing_place.reviews:
-            if review.user_id == current_user["id"]:
+            if review.user_id == user_id:
                 return {'error': 'You have already reviewed this place'}, 400
 
         try:
@@ -63,10 +64,8 @@ class ReviewList(Resource):
         """
         Retrieve a list of all reviews
         """
-        review_list = facade.get_all_reviews()
+        review_list = facade.get_all_reviews() or []
         reviews = []
-        if len(review_list) == 0:
-            return {'error': 'No review found'}, 404
         for review in review_list:
             reviews.append({
                 'id': review.id,
@@ -107,14 +106,16 @@ class ReviewResource(Resource):
         Update a review's information
         """
         review_data = api.payload
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() or {}
+        user_id = current_user.get("id") if isinstance(current_user, dict) else current_user
 
-        review_data["user_id"] = current_user["id"]
+        review_data["user_id"] = user_id
         review = facade.get_review(review_id)
         if not review:
             return {'error': 'Review not found'}, 404
 
-        if review.user_id != current_user["id"] and not current_user["is_admin"]:
+        is_admin = current_user.get("is_admin") if isinstance(current_user, dict) else False
+        if review.user_id != user_id and not is_admin:
             return {'error': 'Unauthorized action'}, 403
 
         updated_review = facade.update_review(review_id, review_data)
@@ -129,13 +130,15 @@ class ReviewResource(Resource):
         """
         Delete a review
         """
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() or {}
+        user_id = current_user.get("id") if isinstance(current_user, dict) else current_user
+        is_admin = current_user.get("is_admin") if isinstance(current_user, dict) else False
 
         review = facade.get_review(review_id)
         if not review:
             return {'error': 'Review not found'}, 404
 
-        if review.user_id != current_user["id"] and not current_user["is_admin"]:
+        if review.user_id != user_id and not is_admin:
             return {'error': 'Unauthorized action'}, 403
 
         facade.delete_review(review_id)

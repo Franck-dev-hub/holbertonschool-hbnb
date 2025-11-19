@@ -1,6 +1,5 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
-from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('users', description='User operations')
 
@@ -39,15 +38,10 @@ class UserList(Resource):
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
     @api.doc(description="Register a new user")
-    @jwt_required()
     def post(self):
         """Register a new user"""
         user_data = api.payload
-
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
-
+        password = user_data.get('password')
         # Simulate email uniqueness check
         existing_user = facade.get_user_by_email(user_data['email'])
         if existing_user:
@@ -68,7 +62,13 @@ class UserList(Resource):
         ):
             return {'error': 'Invalid input data'}, 400
 
-        new_user = facade.create_user(user_data)
+        if not password:
+            return {'error': 'Invalid input data'}, 400
+
+        try:
+            new_user = facade.create_user(user_data)
+        except ValueError:
+            return {'error': 'Invalid input data'}, 400
         return {
             'id': new_user.id,
             'first_name': new_user.first_name,
@@ -78,10 +78,18 @@ class UserList(Resource):
 
     @api.response(200, 'Success')
     @api.doc(description="Get list of users")
-    @api.marshal_list_with(user_model)
     def get(self):
         """get list of users"""
-        return facade.get_all_users(), 200
+        users = facade.get_all_users() or []
+        return [
+            {
+                'id': user.id,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email
+            }
+            for user in users
+        ], 200
 
 
 @api.route('/<string:user_id>')
@@ -94,7 +102,6 @@ class UserUpdateAndFetch(Resource):
     @api.response(404, 'User not found')
     @api.response(400, 'Invalid input data')
     @api.response(400, 'Email already registered')
-    @jwt_required()
     def put(self, user_id):
         """
         Put method to update a user's attributes.
@@ -108,10 +115,6 @@ class UserUpdateAndFetch(Resource):
             is not found or input data is invalid.
         """
         # Verify user exists
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
-
         user = facade.get_user(user_id)
         if not user:
             return {'error': 'User not found'}, 404
@@ -129,6 +132,8 @@ class UserUpdateAndFetch(Resource):
             or user_data.get('last_name') == ''
             or user_data.get('email') == ''
         ):
+            return {'error': 'Invalid input data'}, 400
+        if 'password' in user_data and user_data['password'] == '':
             return {'error': 'Invalid input data'}, 400
 
         # Verify email format (simple check)
