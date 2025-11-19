@@ -4,25 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-png">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- Header -->
-  <div id ="header"></div>
+  <div id="header"></div>
   <!-- Main -->
   <main>
     <form id="login-form">
       <h2>Login</h2>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Login</button>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <a href="add_account.html" class="link">Create Account</a>
     </form>
   </main>
   <!-- Footer -->
-  <div id ="footer"></div>
+  <div id="footer"></div>
   <!-- Scripts -->
   <script src="js/header-footer.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
