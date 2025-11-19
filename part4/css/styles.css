@@ -10,10 +10,23 @@ body {
 	color: #333;
 }
 
+body main h2 {
+	text-align: center;
+}
+
 header {
 	background-color: #333;
 	color: #fff;
 	padding: 1rem;
+}
+
+.nav-bar-ul {
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav-bar-ul div {
+	margin: 10px;
 }
 
 nav a {
@@ -28,4 +41,8 @@ ul {
 
 main {
 	padding: 2rem;
+}
+
+.hidden {
+	display: none;
 }
