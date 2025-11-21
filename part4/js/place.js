@@ -84,7 +84,7 @@ async function loadReviews(placeId) {
     const response = await fetch(`${API_BACK}/places/${placeId}/reviews`);
 
     if (!response.ok) {
-      throw new Error("Failed to load reviews");
+      throw new Error(`Failed to load reviews, error : ${response.status}`);
     }
 
     const reviews = await response.json();
