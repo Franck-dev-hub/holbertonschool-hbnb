@@ -19,82 +19,40 @@ def populate_database():
         print("Creating database tables...")
         db.create_all()
 
-        print("Clearing existing data...")
-        db.session.query(Review).delete()
-        db.session.query(Place).delete()
-        db.session.query(Amenity).delete()
-        db.session.query(User).delete()
-        db.session.commit()
-
-        # Create users
+        # Users
         print("Creating users...")
-        users = [
-            User(
-                email="john.doe@example.com",
-                first_name="John",
-                last_name="Doe",
-                password="password123",
-                is_admin=False
-            ),
-            User(
-                email="jane.smith@example.com",
-                first_name="Jane",
-                last_name="Smith",
-                password="password123",
-                is_admin=False
-            ),
-            User(
-                email="admin@hbnb.com",
-                first_name="Admin",
-                last_name="User",
-                password="admin123",
-                is_admin=True
-            ),
-            User(
-                email="marie.dupont@example.com",
-                first_name="Marie",
-                last_name="Dupont",
-                password="password123",
-                is_admin=False
-            ),
-            User(
-                email="pierre.martin@example.com",
-                first_name="Pierre",
-                last_name="Martin",
-                password="password123",
-                is_admin=False
-            )
+        users_data = [
+            {"email": "john.doe@example.com", "first_name": "John", "last_name": "Doe", "password": "password123", "is_admin": False},
+            {"email": "jane.smith@example.com", "first_name": "Jane", "last_name": "Smith", "password": "password123", "is_admin": False},
+            {"email": "admin@hbnb.com", "first_name": "Admin", "last_name": "User", "password": "admin123", "is_admin": True},
+            {"email": "marie.dupont@example.com", "first_name": "Marie", "last_name": "Dupont", "password": "password123", "is_admin": False},
+            {"email": "pierre.martin@example.com", "first_name": "Pierre", "last_name": "Martin", "password": "password123", "is_admin": False},
         ]
 
-        for user in users:
-            user.save(commit=False)
+        users = []
+        for u in users_data:
+            user = User.query.filter_by(email=u["email"]).first()
+            if not user:
+                user = User(**u)
+                db.session.add(user)
+            users.append(user)
         db.session.commit()
         print(f"Created {len(users)} users")
 
-        # Create amenities
+        # Amenities
         print("Creating amenities...")
-        amenities_data = [
-            "WiFi",
-            "Kitchen",
-            "Parking",
-            "Pool",
-            "Air Conditioning",
-            "Heating",
-            "Washer",
-            "Dryer",
-            "TV",
-            "Gym"
-        ]
-
+        amenities_data = ["WiFi", "Kitchen", "Parking", "Pool", "Air Conditioning", "Heating", "Washer", "Dryer", "TV", "Gym"]
         amenities = []
-        for amenity_name in amenities_data:
-            amenity = Amenity(name=amenity_name)
-            amenity.save(commit=False)
+        for name in amenities_data:
+            amenity = Amenity.query.filter_by(name=name).first()
+            if not amenity:
+                amenity = Amenity(name=name)
+                db.session.add(amenity)
             amenities.append(amenity)
         db.session.commit()
         print(f"Created {len(amenities)} amenities")
 
-        # Create places
+        # Places
         print("Creating places...")
         places_data = [
             {
@@ -120,90 +78,40 @@ def populate_database():
                 "surface": 100.0,
                 "owner_email": "jane.smith@example.com",
                 "amenities": ["WiFi", "Kitchen", "Parking", "TV", "Heating"]
-            },
-            {
-                "title": "Charming House in Marseille",
-                "description": "Traditional Provençal house with garden, perfect for families. Close to the beach and city center.",
-                "price": 150.0,
-                "latitude": 43.2965,
-                "longitude": 5.3698,
-                "rooms": 4,
-                "capacity": 1,
-                "surface": 20.0,
-                "owner_email": "marie.dupont@example.com",
-                "amenities": ["WiFi", "Kitchen", "Parking", "Pool", "Washer", "Dryer"]
-            },
-            {
-                "title": "Studio in Nice",
-                "description": "Bright and modern studio apartment near the beach. Ideal for a relaxing vacation by the Mediterranean.",
-                "price": 75.0,
-                "latitude": 43.7102,
-                "longitude": 7.2620,
-                "rooms": 1,
-                "capacity": 10,
-                "surface": 200.0,
-                "owner_email": "pierre.martin@example.com",
-                "amenities": ["WiFi", "Air Conditioning", "TV"]
-            },
-            {
-                "title": "Luxury Villa in Cannes",
-                "description": "Stunning villa with private pool and garden. Perfect for a luxurious stay on the French Riviera.",
-                "price": 300.0,
-                "latitude": 43.5528,
-                "longitude": 7.0174,
-                "rooms": 5,
-                "capacity": 3,
-                "surface": 55.0,
-                "owner_email": "jane.smith@example.com",
-                "amenities": ["WiFi", "Kitchen", "Parking", "Pool", "Air Conditioning", "TV", "Gym", "Washer", "Dryer"]
-            },
-            {
-                "title": "Rustic Cottage in Provence",
-                "description": "Authentic Provençal cottage surrounded by lavender fields. Peaceful and romantic setting.",
-                "price": 95.0,
-                "latitude": 43.8316,
-                "longitude": 5.0369,
-                "rooms": 2,
-                "capacity": 6,
-                "surface": 102.0,
-                "owner_email": "john.doe@example.com",
-                "amenities": ["WiFi", "Kitchen", "Parking", "Heating"]
             }
         ]
 
         places = []
-        for place_data in places_data:
-            # Find owner by email
-            owner = User.query.filter_by(email=place_data["owner_email"]).first()
+        for p_data in places_data:
+            owner = User.query.filter_by(email=p_data["owner_email"]).first()
             if not owner:
-                print(f"Warning: Owner {place_data['owner_email']} not found, skipping place {place_data['title']}")
+                print(f"Owner {p_data['owner_email']} not found, skipping place {p_data['title']}")
                 continue
 
-            place = Place(
-                title=place_data["title"],
-                description=place_data["description"],
-                price=place_data["price"],
-                latitude=place_data["latitude"],
-                longitude=place_data["longitude"],
-                owner_id=owner.id,
-                rooms=place_data["rooms"],
-                capacity=place_data["capacity"],
-                surface=place_data["surface"]
-            )
-
-            # Add amenities to place
-            for amenity_name in place_data["amenities"]:
-                amenity = Amenity.query.filter_by(name=amenity_name).first()
-                if amenity:
-                    place.add_amenity(amenity)
-
-            place.save(commit=False)
+            place = Place.query.filter_by(title=p_data["title"]).first()
+            if not place:
+                place = Place(
+                    title=p_data["title"],
+                    description=p_data["description"],
+                    price=p_data["price"],
+                    latitude=p_data["latitude"],
+                    longitude=p_data["longitude"],
+                    owner_id=owner.id,
+                    rooms=p_data["rooms"],
+                    capacity=p_data["capacity"],
+                    surface=p_data["surface"]
+                )
+                db.session.add(place)
+                db.session.flush()  # Pour récupérer place.id avant commit
+                for amenity_name in p_data["amenities"]:
+                    amenity = Amenity.query.filter_by(name=amenity_name).first()
+                    if amenity:
+                        place.add_amenity(amenity)
             places.append(place)
-
         db.session.commit()
         print(f"Created {len(places)} places")
 
-        # Create reviews
+        # Reviews
         print("Creating reviews...")
         reviews_data = [
             {
@@ -219,76 +127,32 @@ def populate_database():
                 "rating": 4,
                 "place_title": "Cozy Apartment in Paris",
                 "user_email": "marie.dupont@example.com"
-            },
-            {
-                "title": "Amazing loft!",
-                "text": "This loft exceeded our expectations. The views are incredible and the space is very comfortable.",
-                "rating": 5,
-                "place_title": "Modern Loft in Lyon",
-                "user_email": "john.doe@example.com"
-            },
-            {
-                "title": "Perfect for families",
-                "text": "We stayed here with our two children and had a fantastic time. The house is spacious and the garden is lovely.",
-                "rating": 5,
-                "place_title": "Charming House in Marseille",
-                "user_email": "pierre.martin@example.com"
-            },
-            {
-                "title": "Beautiful studio",
-                "text": "Small but perfectly organized studio. Great location near the beach. Would definitely stay again!",
-                "rating": 4,
-                "place_title": "Studio in Nice",
-                "user_email": "jane.smith@example.com"
-            },
-            {
-                "title": "Luxury experience",
-                "text": "Absolutely stunning villa! The pool and garden are beautiful. Worth every penny for a special occasion.",
-                "rating": 5,
-                "place_title": "Luxury Villa in Cannes",
-                "user_email": "john.doe@example.com"
-            },
-            {
-                "title": "Peaceful retreat",
-                "text": "A wonderful escape from city life. The cottage is charming and the surroundings are breathtaking.",
-                "rating": 5,
-                "place_title": "Rustic Cottage in Provence",
-                "user_email": "marie.dupont@example.com"
             }
         ]
 
-        reviews = []
-        for review_data in reviews_data:
-            # Find place by title
-            place = Place.query.filter_by(title=review_data["place_title"]).first()
-            if not place:
-                print(f"Warning: Place {review_data['place_title']} not found, skipping review")
+        for r_data in reviews_data:
+            place = Place.query.filter_by(title=r_data["place_title"]).first()
+            user = User.query.filter_by(email=r_data["user_email"]).first()
+            if not place or not user:
+                print(f"Skipping review '{r_data['title']}' due to missing user or place")
                 continue
 
-            # Find user by email
-            user = User.query.filter_by(email=review_data["user_email"]).first()
-            if not user:
-                print(f"Warning: User {review_data['user_email']} not found, skipping review")
-                continue
-
-            review = Review(
-                title=review_data["title"],
-                text=review_data["text"],
-                rating=review_data["rating"],
-                place_id=place.id,
-                place=place,
-                user_id=user.id,
-                user=user
-            )
-
-            review.save(commit=False)
-            reviews.append(review)
-
+            review = Review.query.filter_by(title=r_data["title"], place_id=place.id).first()
+            if not review:
+                review = Review(
+                    text=r_data["text"],
+                    rating=r_data["rating"],
+                    place_id=place.id,
+                    user_id=user.id,
+                    title=r_data.get("title")
+                )
+                db.session.add(review)
         db.session.commit()
-        print(f"Created {len(reviews)} reviews")
+        print(f"Created {len(reviews_data)} reviews")
 
+        # Summary
         print("\nDatabase populated successfully!")
-        print(f"\nSummary:")
+        print(f"Summary:")
         print(f"  - Users: {User.query.count()}")
         print(f"  - Places: {Place.query.count()}")
         print(f"  - Amenities: {Amenity.query.count()}")
