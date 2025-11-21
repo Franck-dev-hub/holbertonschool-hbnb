@@ -19,7 +19,7 @@ function errorText(parent, text) {
   parent.appendChild(error);
 }
 
-// Load place details
+// Fetch and render place details from API
 async function loadPlaceDetails() {
   // If id exist
   if (!placeId) {
@@ -171,9 +171,19 @@ async function handleReviewSubmit(event) {
   }
 }
 
-// Load details of the place
+// Init place details if DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
+  // Check auth status - redirect if not authenticated
+  const token = getCookie("access_token");
+  if (!token) {
+    window.location.href = "login.html";
+    return; // Stop execution if not authenticated
+  }
+
+  // Load place details and reviews
   loadPlaceDetails();
+
+  // Attach submit handler to review form if exists
   const reviewForm = document.getElementById("review-form");
   if (reviewForm) {
     reviewForm.addEventListener("submit", handleReviewSubmit);
