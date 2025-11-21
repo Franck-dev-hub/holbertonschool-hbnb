@@ -30,7 +30,7 @@ async function loadPlaceDetails() {
 
   try {
     // Fetch details from API
-    const response = await fetch(`http://localhost:5000/api/v1/places/${placeId}`);
+    const response = await fetch(`${API_BACK}/places/${placeId}`);
 
     if (!response.ok) {
       throw new Error("Place not found");
@@ -81,7 +81,7 @@ async function loadPlaceDetails() {
 // Load reviews
 async function loadReviews(placeId) {
   try {
-    const response = await fetch(`http://localhost:5000/api/v1/places/${placeId}/reviews`);
+    const response = await fetch(`${API_BACK}/places/${placeId}/reviews`);
 
     if (!response.ok) {
       throw new Error("Failed to load reviews");
@@ -137,7 +137,7 @@ async function handleReviewSubmit(event) {
 
   try {
     // Send to API
-    const response = await fetch("http://localhost:5000/api/v1/reviews", {
+    const response = await fetch(`${API_BACK}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
