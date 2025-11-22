@@ -40,7 +40,7 @@ async function loadPlaceDetails() {
     const detailsSection = document.getElementById("place-details");
 
     // Prepare owner name
-    const ownerName = place.owner 
+    const ownerName = place.owner
       ? `${place.owner.first_name} ${place.owner.last_name}`
       : "Unknown";
 
@@ -72,9 +72,9 @@ async function loadPlaceDetails() {
     await loadReviews(placeId);
 
   } catch (err) {
-    console.error("Error loading place details:", err);
+    console.error(`Error loading place details:\n${err}`);
     const detailsSection = document.getElementById("place-details");
-    errorText(detailsSection, "Error loading place details. Please try again later.");
+    errorText(detailsSection, `Error loading place details.\n${err}`);
   }
 }
 
@@ -113,9 +113,9 @@ async function loadReviews(placeId) {
     }
 
   } catch (err) {
-    console.error("Error loading reviews:", err);
+    console.error(`Error loading reviews:\n${err}`);
     const reviewsSection = document.getElementById("reviews");
-    errorText(reviewsSection, "Error loading reviews.");
+    errorText(reviewsSection, `Error loading reviews.\n${err}`);
   }
 }
 
@@ -136,8 +136,8 @@ async function handleReviewSubmit(event) {
   const rating = parseInt(document.getElementById("review-rating").value, 10);
 
   try {
-    // Send to API
-    const response = await fetch(`${API_BACK}/reviews`, {
+    // Send to API (use trailing slash to avoid Flask redirect which breaks CORS preflight)
+    const response = await fetch(`${API_BACK}/reviews/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -166,24 +166,18 @@ async function handleReviewSubmit(event) {
     alert("Review submitted successfully!");
 
   } catch (err) {
-    console.error("Error submitting review:", err);
-    alert("Error submitting review. Please try again.");
+    console.error(`Error submitting review:\n${err}`);
+    alert(`Error submitting review.\n${err}`);
   }
 }
 
 // Init place details if DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Check auth status - redirect if not authenticated
-  const token = getCookie("access_token");
-  if (!token) {
-    window.location.href = "login.html";
-    return; // Stop execution if not authenticated
-  }
+  const placeId = new URLSearchParams(window.location.search).get("id");
+  if (!placeId) return;
 
-  // Load place details and reviews
-  loadPlaceDetails();
+  loadPlaceDetails(placeId);
 
-  // Attach submit handler to review form if exists
   const reviewForm = document.getElementById("review-form");
   if (reviewForm) {
     reviewForm.addEventListener("submit", handleReviewSubmit);
