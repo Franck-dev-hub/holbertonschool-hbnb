@@ -1,6 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import request, current_app
 
 api = Namespace('reviews', description='Reviews operations')
 
@@ -24,7 +25,37 @@ class ReviewList(Resource):
         """
         Register a new review
         """
-        review_data = api.payload
+        try:
+            current_app.logger.debug("Raw request data: {}".format(request.get_data(as_text=True)))
+            current_app.logger.debug("api.payload: {}".format(api.payload))
+            current_app.logger.debug("JWT identity: {}".format(get_jwt_identity()))
+        except Exception as e:
+            current_app.logger.debug("Failed to log request payload: {}".format(e))
+
+        try:
+            review_data = request.get_json(force=True)
+        except Exception as e:
+            current_app.logger.debug("Failed to parse JSON: {}".format(e))
+            return {'error': 'Invalid JSON payload'}, 400
+
+        if not isinstance(review_data, dict):
+            return {'error': 'Invalid JSON payload'}, 400
+
+        # Required fields validation
+        required_fields = ['title', 'text', 'rating', 'place_id']
+        for field in required_fields:
+            if field not in review_data:
+                return {'error': f'Missing field: {field}'}, 400
+
+        # Validate rating
+        try:
+            rating = int(review_data.get('rating'))
+            if not (1 <= rating <= 5):
+                raise ValueError('Rating out of range')
+            review_data['rating'] = rating
+        except Exception as e:
+            return {'error': 'Rating must be an integer between 1 and 5'}, 400
+
         current_user = get_jwt_identity() or {}
         user_id = current_user.get("id") if isinstance(current_user, dict) else current_user
 
@@ -47,8 +78,11 @@ class ReviewList(Resource):
 
         try:
             new_review = facade.create_review(review_data)
-        except ValueError:
-            return {'error': 'Invalid input data'}, 400
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            current_app.logger.exception('Unexpected error creating review')
+            return {'error': 'Server error creating review'}, 500
         else:
             return {
                 'id': new_review.id,
