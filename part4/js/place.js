@@ -19,6 +19,24 @@ function errorText(parent, text) {
   parent.appendChild(error);
 }
 
+// Render Add review button if authenticated
+function renderAddReviewButton() {
+  const addReviewSection = document.getElementById("add-review");
+  addReviewSection.innerHTML = "";
+  if (!isAuthenticated()) {
+    return;
+  }
+
+  const btn = document.createElement("button");
+  btn.textContent = "Add a review";
+  btn.className = "btn-add-review";
+  btn.addEventListener("click", () => {
+    window.location.href = `add_review.html?id=${encodeURIComponent(placeId)}`;
+  });
+
+  addReviewSection.appendChild(btn);
+}
+
 // Fetch and render place details from API
 async function loadPlaceDetails() {
   // If id exist
@@ -67,6 +85,8 @@ async function loadPlaceDetails() {
     boldParagraph(infoDiv, "Surface: ", `${place.surface} m²`);
     boldParagraph(infoDiv, "Amenities: ", amenitiesList);
     detailsSection.appendChild(infoDiv);
+
+    renderAddReviewButton();
 
     // Load reviews
     await loadReviews(placeId);
@@ -130,11 +150,11 @@ async function handleReviewSubmit(event) {
   }
 
   // Fetch form datas
-  const text = document.getElementById("review-text").value;
-  const rating = parseInt(document.getElementById("review-rating").value, 10);
+  const text = document.getElementById("review-text") ? document.getElementById("review-text").value : null;
+  const rating = document.getElementById("review-rating") ? parseInt(document.getElementById("review-rating").value, 10) : null;
 
   try {
-    // Send to API (use trailing slash to avoid Flask redirect which breaks CORS preflight)
+    // Send to API
     const response = await fetch(`${API_BACK}/reviews/`, {
       method: "POST",
       headers: {
@@ -153,9 +173,6 @@ async function handleReviewSubmit(event) {
       alert(`Error: ${error.error || "Failed to submit review"}`);
       return;
     }
-
-    // Reset form
-    document.getElementById("review-form").reset();
 
     // Load review to display
     await loadReviews(placeId);
