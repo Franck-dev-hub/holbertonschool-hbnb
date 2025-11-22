@@ -60,25 +60,11 @@ class InMemoryRepository(Repository):
 
 class SQLAlchemyRepository(Repository):
     """
-    A repository implementation that uses SQLAlchemy for data storage and retrieval.
-
-    This class provides a simple interface for interacting with database models,
-    allowing basic operations such as adding, retrieving, updating, or deleting
-    records through SQLAlchemy sessions.
-
-    Attributes
-    ----------
-    model : object
-        The SQLAlchemy model class associated with this repository.
+    Implementation that uses SQLAlchemy for data storage and retrieval.
     """
     def __init__(self, model):
         """
         Initialize the class with a model object for storage.
-
-        Parameters
-        ----------
-        model : object
-            The model to be stored for later access or reference.
         """
         self.model = model
 
