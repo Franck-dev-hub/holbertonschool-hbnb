@@ -19,23 +19,11 @@ list, search, and book accommodations.
 
 ## 🔖 Table of Contents
 
-<details>
- <summary>
-  Click to enlarge
- </summary>
-
 - 📝 [Description](#-description)
-- 🎓 [Objectives](#-objectives)
 - 🔨 [Tech stack](#-tech-stack)
-- 🎬 [Demo](#-demo)
-- 🌐 [Api](#-api)
 - 🏗️ [Structure](#%EF%B8%8Fstructure)
 - 📂 [Files](#-files)
-- 🔧 [What's next?](#-whats-next)
-- ♥️ [Thanks](#%EF%B8%8F-thanks)
 - 👷 [Authors](#-authors)
-
-</details>
 
 ## 📝 Description
 
@@ -55,14 +43,6 @@ holberton School curriculum guidelines.
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-
-## 🎬 Demo
-
-Comming soon.
-
-## 🌐 Api
-
-Comming soon.
 
 ## 🏗️Structure
 
@@ -102,9 +82,11 @@ Comming soon.
 
 | **File/Repository** | **Description** |
 |----------|-----------------|
-| [part1](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
-| [part2](https://github.com/AdelMej/holbertonschool-hbnb/tree/main/part2) | Base HBnB project structure |
-| [README.md](https://github.com/AdelMej/holbertonschool-hbnb/blob/main/README.md) | README file |
+| [part1](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
+| [part2](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part2) | Base HBnB project structure |
+| [part3](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part3) | Back-end |
+| [part4](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part4) | Front-end |
+| [README.md](https://github.com/Franck-dev-hub/holbertonschool-hbnb/blob/main/README.md) | README file |
 
 
 ## 👷 Authors
@@ -122,3 +104,4 @@ Comming soon.
 ### **Haitu Nguyen**
 
 - GitHub: [@N-Haitu31](https://github.com/N-Haitu31)
+- LinkedIn: [@N-Haitu](https://www.linkedin.com/in/haitu-nguyen-76941638b/)
