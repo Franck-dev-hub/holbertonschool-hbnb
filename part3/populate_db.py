@@ -41,7 +41,7 @@ def populate_database():
 
         # Amenities
         print("Creating amenities...")
-        amenities_data = ["WiFi", "Kitchen", "Parking", "Pool", "Air Conditioning", "Heating", "Washer", "Dryer", "TV", "Gym"]
+        amenities_data = ["WiFi", "Kitchen", "Parking", "Pool", "Air Conditioning", "Heating", "Washer", "Dryer", "TV", "Gym", "Breakfast", "Fireplace", "Garden"]
         amenities = []
         for name in amenities_data:
             amenity = Amenity.query.filter_by(name=name).first()
@@ -78,6 +78,54 @@ def populate_database():
                 "surface": 100.0,
                 "owner_email": "jane.smith@example.com",
                 "amenities": ["WiFi", "Kitchen", "Parking", "TV", "Heating"]
+            },
+            {
+                "title": "Charming Studio in Nice",
+                "description": "Small but charming studio a short walk from the beach. Ideal for solo travelers or couples.",
+                "price": 60.0,
+                "latitude": 43.7102,
+                "longitude": 7.2620,
+                "rooms": 1,
+                "capacity": 2,
+                "surface": 28.0,
+                "owner_email": "marie.dupont@example.com",
+                "amenities": ["WiFi", "TV", "Washer"]
+            },
+            {
+                "title": "Seaside Villa in Bordeaux",
+                "description": "Beautiful villa with garden and pool, perfect for families. Close to vineyards and the coastline.",
+                "price": 250.0,
+                "latitude": 44.8378,
+                "longitude": -0.5792,
+                "rooms": 4,
+                "capacity": 8,
+                "surface": 220.0,
+                "owner_email": "pierre.martin@example.com",
+                "amenities": ["Pool", "Garden", "Parking", "Air Conditioning"]
+            },
+            {
+                "title": "Central Apartment in Marseille",
+                "description": "Bright apartment in the city center with easy access to public transport and restaurants.",
+                "price": 95.0,
+                "latitude": 43.2965,
+                "longitude": 5.3698,
+                "rooms": 2,
+                "capacity": 4,
+                "surface": 55.0,
+                "owner_email": "admin@hbnb.com",
+                "amenities": ["WiFi", "Kitchen", "Heating"]
+            },
+            {
+                "title": "Countryside Cottage",
+                "description": "Cozy cottage surrounded by nature. Fireplace and breakfast included.",
+                "price": 110.0,
+                "latitude": 46.2276,
+                "longitude": 2.2137,
+                "rooms": 3,
+                "capacity": 5,
+                "surface": 90.0,
+                "owner_email": "john.doe@example.com",
+                "amenities": ["Fireplace", "Garden", "Breakfast"]
             }
         ]
 
@@ -115,14 +163,12 @@ def populate_database():
         print("Creating reviews...")
         reviews_data = [
             {
-                "title": "Great stay!",
                 "text": "We had a wonderful time in this apartment. The location is perfect and everything was clean and comfortable.",
                 "rating": 5,
                 "place_title": "Cozy Apartment in Paris",
                 "user_email": "jane.smith@example.com"
             },
             {
-                "title": "Nice place",
                 "text": "The apartment was nice and well-located. Some minor issues but overall a good experience.",
                 "rating": 4,
                 "place_title": "Cozy Apartment in Paris",
@@ -134,17 +180,17 @@ def populate_database():
             place = Place.query.filter_by(title=r_data["place_title"]).first()
             user = User.query.filter_by(email=r_data["user_email"]).first()
             if not place or not user:
-                print(f"Skipping review '{r_data['title']}' due to missing user or place")
+                print(f"Skipping review for place '{r_data.get('place_title')}' by '{r_data.get('user_email')}' due to missing user or place")
                 continue
 
-            review = Review.query.filter_by(title=r_data["title"], place_id=place.id).first()
+            # Check existing review by the same user for the same place
+            review = Review.query.filter_by(user_id=user.id, place_id=place.id).first()
             if not review:
                 review = Review(
                     text=r_data["text"],
                     rating=r_data["rating"],
                     place_id=place.id,
-                    user_id=user.id,
-                    title=r_data.get("title")
+                    user_id=user.id
                 )
                 db.session.add(review)
         db.session.commit()

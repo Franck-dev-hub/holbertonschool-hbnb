@@ -113,6 +113,7 @@ class PlaceList(Resource):
         return places, 200
 
 
+
 @api.route("/<place_id>")
 class PlaceResource(Resource):
     @api.response(200, "Place details retrieved successfully")
@@ -232,7 +233,6 @@ class PlaceReviewList(Resource):
         for review in review_list:
             reviews.append({
                 'id': review.id,
-                'title': review.title,
                 'text': review.text,
                 'rating': review.rating
         })

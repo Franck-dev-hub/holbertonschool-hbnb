@@ -97,13 +97,12 @@ async function loadReviews(placeId) {
         const reviewCard = document.createElement("div");
         reviewCard.className = "review-card";
 
-        // Display review title
-        const reviewTitle = document.createElement("h3");
-        reviewTitle.textContent = review.title;
-        reviewCard.appendChild(reviewTitle);
+        // Display review text
+        const reviewText = document.createElement("p");
+        reviewText.textContent = review.text;
+        reviewCard.appendChild(reviewText);
 
         // Display details
-        boldParagraph(reviewCard, "", review.text);
         boldParagraph(reviewCard, "Rating: ", `${review.rating}/5`);
 
         reviewsSection.appendChild(reviewCard);
@@ -131,7 +130,6 @@ async function handleReviewSubmit(event) {
   }
 
   // Fetch form datas
-  const title = document.getElementById("review-title").value;
   const text = document.getElementById("review-text").value;
   const rating = parseInt(document.getElementById("review-rating").value, 10);
 
@@ -144,7 +142,6 @@ async function handleReviewSubmit(event) {
         "Authorization": `Bearer ${accessToken}`
       },
       body: JSON.stringify({
-        title: title,
         text: text,
         rating: rating,
         place_id: placeId

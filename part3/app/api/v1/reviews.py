@@ -7,7 +7,6 @@ api = Namespace('reviews', description='Reviews operations')
 
 
 review_model = api.model('Review', {
-    'title': fields.String(required=True, description='Title of the review'),
     'text': fields.String(required=True, description='Text of the review'),
     'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
     'user_id': fields.String(required=False, description='ID of the user'),
@@ -42,7 +41,7 @@ class ReviewList(Resource):
             return {'error': 'Invalid JSON payload'}, 400
 
         # Required fields validation
-        required_fields = ['title', 'text', 'rating', 'place_id']
+        required_fields = ['text', 'rating', 'place_id']
         for field in required_fields:
             if field not in review_data:
                 return {'error': f'Missing field: {field}'}, 400
@@ -86,7 +85,6 @@ class ReviewList(Resource):
         else:
             return {
                 'id': new_review.id,
-                'title': new_review.title,
                 'text': new_review.text,
                 'rating': new_review.rating,
                 'user_id': new_review.user_id,
@@ -103,7 +101,6 @@ class ReviewList(Resource):
         for review in review_list:
             reviews.append({
                 'id': review.id,
-                'title': review.title,
                 'text': review.text,
                 'rating': review.rating,
             })
@@ -123,7 +120,6 @@ class ReviewResource(Resource):
             return {'error': 'Review not found'}, 404
         return {
             'id': review.id,
-            'title': review.title,
             'text': review.text,
             'rating': review.rating,
             'user_id': review.user_id,
