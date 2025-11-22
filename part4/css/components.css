@@ -1,0 +1,54 @@
+/* Reusable components */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-700);
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.form-field label {
+  margin-bottom: 0.25rem;
+  color: var(--muted);
+}
+
+.input,
+textarea,
+select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #e6e9ee;
+}
+
+.small-muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}

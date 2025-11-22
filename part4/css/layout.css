@@ -1,0 +1,33 @@
+/* Layout utilities and containers */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--container-padding) * 2);
+}
+
+.header {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: white;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
