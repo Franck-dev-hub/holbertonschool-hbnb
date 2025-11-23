@@ -23,7 +23,7 @@ It allows users to create accounts, create reviews, list and filter places.
 - ![Python](https://badgen.net/pypi/python/black)
 - ![pip](https://badgen.net/pypi/v/pip)
 - ![npm](https://badgen.net/npm/v/@babel/core)
-- Tested on : ![Arch linux](https://img.shields.io/badge/Arch-1793d1?logo=archlinux&logoColor=white&labelColor=1793d1) ![Firefox](https://img.shields.io/badge/Firefox-FF7139?logo=Firefox&logoColor=white).
+- Tested on : ![Arch linux](https://img.shields.io/badge/Arch-1793d1?logo=archlinux&logoColor=white&labelColor=1793d1) ![Firefox](https://img.shields.io/badge/Firefox-FF7139?logo=Firefox&logoColor=white)
 
 ### Technologies used
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)
@@ -46,6 +46,7 @@ git clone https://github.com/Franck-dev-hub/holbertonschool-hbnb
 cd holbertonschool-hbnb && ./run.sh
 ```
 Back-end will be at `localhost:5000/api/v1` and front-end at `localhost:8000`
+
 3. Open [localhost](http://localhost:8000/index.html) to explore HB&B website.
 
 ## Usage
@@ -63,7 +64,6 @@ For more structure details, click on each part.
 | [part2](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part2) | Base HBnB project structure |
 | [part3](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part3) | Back-end |
 | [part4](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part4) | Front-end |
-| [README.md](https://github.com/Franck-dev-hub/holbertonschool-hbnb/blob/main/README.md) | README file |
 
 ## Help
 If you encounter issues, ensure:
@@ -72,9 +72,9 @@ If you encounter issues, ensure:
 - For additional help, refer to the source code or contact the authors.
 
 ## Authors
-- **Adel Mejrissi** [GitHub](https://github.com/AdelMej) [LinkedIn](https://www.linkedin.com/in/adel-mejrissi-709374172/)
-- **Franck Spadotto** [GitHub](https://github.com/Franck-dev-hub) [LinkedIn](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
-- **Haitu Nguyen** [GitHub](https://github.com/N-Haitu31) [Linkedin](https://www.linkedin.com/in/haitu-nguyen-76941638b/)
+- **Adel Mejrissi** [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](#https://github.com/AdelMej) [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](#https://www.linkedin.com/in/adel-mejrissi-709374172/)
+- **Franck Spadotto** [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](#https://github.com/Franck-dev-hub) [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](#https://www.linkedin.com/in/franck-spadotto-466bb1369/)
+- **Haitu Nguyen** [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](#https://github.com/N-Haitu31) [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](#https://www.linkedin.com/in/haitu-nguyen-76941638b/)
 
 ## Version history
 - **v1.0**: Initial Release
@@ -87,5 +87,5 @@ If you encounter issues, ensure:
 This project is licensed under GNU GPL v3.0 - see the LICENSE.txt file for details.
 
 ## Acknowledgments
-Thanks to my peers [Adel M.](https://github.com/AdelMej) and [Haitu N.](https://github.com/N-Haitu31) 
-Thanks to [Holberton School](https://www.holbertonschool.com/) for the project proposal.
+- Thanks to my peers [![Adel M.](https://img.shields.io/badge/Adel-Mejrissi-red)](https://github.com/AdelMej) and [![Haitu N.](https://img.shields.io/badge/Haitu-Nguyen-yellow)](https://github.com/N-Haitu31)
+- Thanks to [![Holberton School](https://img.shields.io/badge/Holberton-School-E1003C)](https://www.holbertonschool.com/) for the project proposal.
