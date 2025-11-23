@@ -47,7 +47,7 @@ cd holbertonschool-hbnb && ./run.sh
 ```
 Back-end will be at `localhost:5000/api/v1` and front-end at `localhost:8000`
 
-3. Open [localhost](http://localhost:8000/index.html) to explore HB&B website.
+3. Open [![localhost 8000](https://img.shields.io/badge/localhost-8000-blue)](http://localhost:8000/index.html) to explore HB&B website.
 
 ## Usage
 On the web site, you can :
@@ -87,5 +87,5 @@ If you encounter issues, ensure:
 This project is licensed under GNU GPL v3.0 - see the LICENSE.txt file for details.
 
 ## Acknowledgments
-- Thanks to my peers [![Adel M.](https://img.shields.io/badge/Adel-Mejrissi-red)](https://github.com/AdelMej) and [![Haitu N.](https://img.shields.io/badge/Haitu-Nguyen-yellow)](https://github.com/N-Haitu31)
+- Thanks to my peers [![Adel M.](https://img.shields.io/badge/Adel-Mejrissi-red)](https://github.com/AdelMej) [![Haitu N.](https://img.shields.io/badge/Haitu-Nguyen-yellow)](https://github.com/N-Haitu31)
 - Thanks to [![Holberton School](https://img.shields.io/badge/Holberton-School-E1003C)](https://www.holbertonschool.com/) for the project proposal.
