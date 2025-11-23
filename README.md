@@ -20,9 +20,9 @@ It allows users to create accounts, create reviews, list and filter places.
 
 ## Getting started
 ### Prerequisites
-- ![Python](https://badgen.net/pypi/python/black)
-- ![pip](https://badgen.net/pypi/v/pip)
-- ![npm](https://badgen.net/npm/v/@babel/core)
+- ![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=fff)
+- ![pip](https://img.shields.io/badge/pip-25.2-3776AB?logo=python&logoColor=fff) or ![uv](https://img.shields.io/badge/uv-0.8.15-3776AB?logo=python&logoColor=fff)
+- ![Node js](https://img.shields.io/badge/node-25.1.0-F7DF1E?logo=javascript&logoColor=fff)
 - Tested on : ![Arch linux](https://img.shields.io/badge/Arch-1793d1?logo=archlinux&logoColor=white&labelColor=1793d1) ![Firefox](https://img.shields.io/badge/Firefox-FF7139?logo=Firefox&logoColor=white)
 
 ### Technologies used
