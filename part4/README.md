@@ -1,43 +1,40 @@
 # HB&B part 4 - Front-end
-
-## Overview
-This folder has front-end features of the project HB&B.
-HTML, style in CSS and scripts in JavaScript for user interface.
+## Description
+This folder constitutes the fourth part of the HB&B project and provides the front-end of the web app.
 
 ## Structure
 ```
-part4/
+./part4/
+├── README.md
 ├── add_review.html
 ├── create_account.html
-├── header.html
+├── css
+│   ├── cards.css
+│   ├── components.css
+│   ├── layout.css
+│   ├── place.css
+│   ├── styles.css
+│   └── variables.css
 ├── footer.html
+├── header.html
+├── images
+│   ├── favicon.ico
+│   ├── icon.png
+│   ├── icon_bath.png
+│   ├── icon_bed.png
+│   ├── icon_wifi.png
+│   └── logo.png
 ├── index.html
+├── js
+│   ├── add_review.js
+│   ├── auth.js
+│   ├── cards.js
+│   ├── create_account.js
+│   ├── globals.js
+│   ├── header-footer.js
+│   ├── login.js
+│   ├── place.js
+│   └── review.js
 ├── login.html
-├── place.html
-├── css/
-│   ├── components.css
-│   ├── layout.css
-│   ├── place.css
-│   ├── styles.css
-│   └── variables.css
-├── images/
-└── js/
-    ├── add_review.js
-    ├── auth.js
-    ├── cards.js
-    ├── create_account.js
-    ├── globals.js
-    ├── header-footer.js
-    ├── login.js
-    ├── place.js
-    └── review.js
+└── place.html
 ```
-
-## How to use
-- Execute run.sh file to launch back-end and front-end localhost
-  - Back-end in `localhost:5000/api/v1`
-  - Front-end in `localhost:8000`
-```bash
-./run.sh
-```
-- Open [localhost](http://localhost:8000/index.html) to explore HB&B website.

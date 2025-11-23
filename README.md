@@ -1,85 +1,62 @@
+# HB&B project
+## Description
+This project is an educational clone of Airbnb integrating storage, API, and web interface to explore the fundamentals of web development and architecture.
+It allows users to create accounts, create reviews, list and filter places.
+
+## Table of Contents
+- [Description](#description)
+- [Table of contents](#table-of-contents)
+- [Getting started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Technologies used](#technologies-used)
+  - [Installation and run](#installation-and-run)
+- [Usage](#usage)
+- [Project structure](#Project-structure)
+- [Help](#help)
+- [Authors](#authors)
+- [Version history](#Version-history)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Getting started
+### Prerequisites
+- ![Python](https://badgen.net/pypi/python/black)
+- ![pip](https://badgen.net/pypi/v/pip)
+- ![npm](https://badgen.net/npm/v/@babel/core)
+- Tested on : ![Arch linux](https://img.shields.io/badge/Arch-1793d1?logo=archlinux&logoColor=white&labelColor=1793d1) ![Firefox](https://img.shields.io/badge/Firefox-FF7139?logo=Firefox&logoColor=white).
+
+### Technologies used
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)
+![Flask](https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff)
+![SQL Alchemy](https://img.shields.io/badge/SQLAlchemy-red?logo=databricks&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)
+![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
+![Neovim](https://img.shields.io/badge/Neovim-57A143?logo=neovim&logoColor=fff)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff)
+![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff)
+
+### Installation and run
+1. Clone the repository.
+```bash
+git clone https://github.com/Franck-dev-hub/holbertonschool-hbnb
 ```
- _   _ ______      ______ 
-| | | || ___ \     | ___ \
-| |_| || |_/ /_ __ | |_/ /
-|  _  || ___ \ '_ \| ___ \
-| | | || |_/ / | | | |_/ /
-\_| |_/\____/|_| |_\____/ 
-
+2. Move to the folder and execute `run.sh` file to launch back-end and front-end in localhost.
+```bash
+cd holbertonschool-hbnb && ./run.sh
 ```
+Back-end will be at `localhost:5000/api/v1` and front-end at `localhost:8000`
+3. Open [localhost](http://localhost:8000/index.html) to explore HB&B website.
 
-# 🏘️ HBnB (AirBnB clone) project for Holberton School
+## Usage
+On the web site, you can :
+- Create an account.
+- Login / logout.
+- Filter places by price.
+- Add a review if you are logged in.
 
-## 📄 Overview
-
-This project is a clone of the AirBnB website,
-built as part of the curriculum at Holberton School.
-The project involves creating a web application that allows users to
-list, search, and book accommodations.
-
-## 🔖 Table of Contents
-
-- 📝 [Description](#-description)
-- 🔨 [Tech stack](#-tech-stack)
-- 🏗️ [Structure](#%EF%B8%8Fstructure)
-- 📂 [Files](#-files)
-- 👷 [Authors](#-authors)
-
-## 📝 Description
-
-HBnB is a web application that mimics the functionality of the AirBnB platform.
-It allows users to create accounts, list properties, search for accommodations,
-and make bookings. The application is built using Python and follows the
-holberton School curriculum guidelines.
-
-## 🔨 Tech stack
-
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
-![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-
-## 🏗️Structure
-
-```tree
-.
-├── README.md
-├── part1
-│   ├── Documentation.pdf
-│   ├── HBNB Documentation Projet UML.pdf
-│   ├── README.md
-│   └── mermaid
-├── part2
-│   ├──── README.md
-│   ├── app
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   ├── api
-│   │   ├── models
-│   │   ├── persistence
-│   │   └── services
-│   ├── config.py
-│   ├── main.py
-│   ├── pyproject.toml
-│   ├── requirements.txt
-│   ├── run.py
-│   ├── tree.txt
-│   └── uv.lock
-├── tests
-│   ├── test_Amenity.py
-│   ├── test_Place.py
-│   ├── test_Review.py
-│   └── test_User.py
-└── tree.txt
-```
-
-## 📂 Files
-
+## Project structure
+For more structure details, click on each part.
 | **File/Repository** | **Description** |
 |----------|-----------------|
 | [part1](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part1) | Documentation and UML files |
@@ -88,20 +65,27 @@ holberton School curriculum guidelines.
 | [part4](https://github.com/Franck-dev-hub/holbertonschool-hbnb/tree/main/part4) | Front-end |
 | [README.md](https://github.com/Franck-dev-hub/holbertonschool-hbnb/blob/main/README.md) | README file |
 
+## Help
+If you encounter issues, ensure:
+- Python and Node.js are installed on your os.
+- Dependencies are correctly installed.
+- For additional help, refer to the source code or contact the authors.
 
-## 👷 Authors
+## Authors
+- **Adel Mejrissi** [GitHub](https://github.com/AdelMej) [LinkedIn](https://www.linkedin.com/in/adel-mejrissi-709374172/)
+- **Franck Spadotto** [GitHub](https://github.com/Franck-dev-hub) [LinkedIn](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
+- **Haitu Nguyen** [GitHub](https://github.com/N-Haitu31) [Linkedin](https://www.linkedin.com/in/haitu-nguyen-76941638b/)
 
-### **Adel Mejrissi**
+## Version history
+- **v1.0**: Initial Release
+  - `create account`
+  - `login / logout`
+  - `filter places by price`
+  - `add a review`
 
-- GitHub: [@AdelMej](https://github.com/AdelMej)
-- LinkedIn: [@adel mejrissi](https://www.linkedin.com/in/adel-mejrissi-709374172/)
+## License
+This project is licensed under GNU GPL v3.0 - see the LICENSE.txt file for details.
 
-### **Franck Spadotto**
-
-- GitHub: [@Franck-dev-hub](https://github.com/Franck-dev-hub)
-- LinkedIn: [@Franck spadotto](https://www.linkedin.com/in/franck-spadotto-466bb1369/)
-
-### **Haitu Nguyen**
-
-- GitHub: [@N-Haitu31](https://github.com/N-Haitu31)
-- LinkedIn: [@N-Haitu](https://www.linkedin.com/in/haitu-nguyen-76941638b/)
+## Acknowledgments
+Thanks to my peers [Adel M.](https://github.com/AdelMej) and [Haitu N.](https://github.com/N-Haitu31) 
+Thanks to [Holberton School](https://www.holbertonschool.com/) for the project proposal.
