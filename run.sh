@@ -3,28 +3,32 @@
 # Quit if command fail
 set -e
 
-# Check OS
-if grep -qi "debian" /etc/os-release; then
-  os="debian"
-  echo "OS -> Debian"
-elif grep -qi "arch" /etc/os-release; then
-  os="arch"
-  echo "OS -> Arch"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if grep -qi "debian" /etc/os-release; then
+    OS="debian"
+    echo "OS -> Debian"
+  elif grep -qi "arch" /etc/os-release; then
+    OS="arch"
+    echo "OS -> Arch"
+  else
+    OS="linux"
+    echo "OS -> Other Linux"
+  fi
 else
-  os="other"
-  echo "OS -> Other"
+    echo "OS not supported. Please use Linux"
+    exit 1
 fi
 
 # Check package manager
 if command -v uv &> /dev/null; then
   package="uv"
-  echo "PM -> uv"
+  echo "pm -> uv"
 elif command -v pip &> /dev/null; then
   package="pip"
-  echo "PM -> pip"
+  echo "pm -> pip"
 else
   package="other"
-  echo "PM -> Other"
+  echo "pm -> other"
 fi
 
 # Back-end folder
